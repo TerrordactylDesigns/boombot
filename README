@@ -1,0 +1,50 @@
+/*<><><><><><><><><><><><><><><><><><><>
+			BOOM BOT v6.6.6
+<><><><><><><><><><><><><><><><><><><>*/
+
+	A bot for turntable.fm
+	Dj, welcome users,
+	Call out haters, etc
+
+/*<><><><><><><><><><><><><><><><><><><>
+			Requirements
+<><><><><><><><><><><><><><><><><><><>*/
+
+	Node.js
+	NPM
+	ttapi - https://github.com/alaingilbert/Turntable-API
+
+/*<><><><><><><><><><><><><><><><><><><>
+				Setup
+<><><><><><><><><><><><><><><><><><><>*/
+
+	once you have node running, npm,
+	and the ttapi installed:
+
+	Create a FB or twitter account for your new bot.
+	Log in as the bot and use this to get your bots uid, auth token, and your rooms id:
+	http://alaingilbert.github.com/Turntable-API/bookmarklet.html
+	Now use the same method to get your personal accounts user id for control of the bot
+
+	Open boombot.js in Sublime text 2 (Or your editor of choice... but really... go get sublime... its great..)
+	replace the xxxxxxxxxxxxxxxxxxxxxxxx's with your auth, bot id, and your own personal user id. 
+	each section that requires these are appropriately commented to tell you where to enter them.
+
+	There will also be a few places where you will replace the text YourUserName with your own so the bot will express its love for you.
+
+	Add to the arrays anything you want to add or change. Would be nice of you to keep the url to obtain your own copy under the 
+	/boombot command, but I won't hunt you down if you want it to go.
+
+	path to the saved location,
+	node boombot.js
+
+
+	/*<><><><><><><><><><><><><><><><><><><>
+					Notes
+	<><><><><><><><><><><><><><><><><><><>*/
+
+		I know nothing about node. This was a playground that seemed to be liked. No warranties, no guarantees. I will however help you to the best that I can if you have any issues or find any bugs.
+
+		If you're more experienced than I am and want to tell me how to make this better in any way. I am all ears. Fell free to fork, if you come up with some cool scripts you can request a pull back and I will add them.
+
+		Lastly, ENJOY IT!!!!! It's not the best or most feature filled bot, but I appreciate you using him!
