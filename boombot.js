@@ -274,23 +274,19 @@ bot.on('speak', function (data) {
         bot.speak('I do not have that form master.');
       }
     }
-
-
-
-    //this code is from the api page. it currently does not work and causes the bot to crash but I have honestly not tried more than pasting it here. When I get some spare time this will be functional.
-       //adds the current playing song to the bots playlist
-    // if (text.match(/^\*addsong$/)) {
-    //    bot.roomInfo(true, function(data) {
-    //       try {
-    //       var newSong = data.room.metadata.current_song._id;
-    //       var newSongName = songName = data.room.metadata.current_song.metadata.song;
-    //       bot.playlistAdd(newSong);
-    //       bot.speak('Added '+newSongName+' to the masters amusement list.');
-    //       } catch (err) {
-    //         errMsg(err);
-    //       }
-    //    });
-    // }
+    //adds the current playing song to the bots playlist
+    if (data.text.match(/addsong/i)) {
+       bot.roomInfo(true, function(data) {
+          try {
+          var newSong = data.room.metadata.current_song._id;
+          var newSongName = songName = data.room.metadata.current_song.metadata.song;
+          bot.playlistAdd(newSong);
+          bot.speak('Added '+newSongName+' to the masters amusement list.');
+          } catch (err) {
+            errMsg(err);
+          }
+       });
+    }
   }
 });
 
