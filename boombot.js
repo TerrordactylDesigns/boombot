@@ -351,3 +351,35 @@ bot.on('speak', function (data) {
 
 });   
 
+
+// Live tweeting //Code from - https://github.com/AvianFlu/ntwitter
+//by default this is commented out for people who dont care about Twitter integration. Uncomment the below section, replace the parts with your own keys and URLs, delete the instructional comments out.
+
+// var twitter = require('ntwitter'); 
+// bot.on('newsong', function (data){ 
+//   // Tweet the new song from the twitter apps account you created. Gives the song name, artist, and #turntablefm hashtag
+//   var twit = new twitter({
+//     consumer_key: 'put your consumer key here', //add your consumer key
+//     consumer_secret: 'put your consumer secret key here', //add your consumer secret key
+//     access_token_key: 'put your access token key here', //add your access token
+//     access_token_secret: 'put your access token secret key in here' //add your access token secret
+//   });
+//   try {
+//     bot.roomInfo(true, function(data) { //tweet on new song change event
+//       var currSong = data.room.metadata.current_song.metadata.song; //grabs the current songs name
+//       var currArtist = data.room.metadata.current_song.metadata.artist; //grabs the current songs artist
+//       twit
+//       .verifyCredentials(function (err, data) {
+//         console.log(data);
+//       })
+//       .updateStatus('Now playing! ' + currSong + ' by: ' + currArtist + ' #turntablefm http://turntable.fm/put_your_rooms_url_here' , //replace the URL with your own rooms or delete.
+//         function (err, data) {
+//           console.log(data);
+//         }
+//       );
+//     });
+//   } catch (err) {
+//       bot.speak(err.toString());
+//   }
+// });
+
