@@ -278,10 +278,10 @@ bot.on('speak', function (data) {
     if (data.text.match(/addsong/i)) {
        bot.roomInfo(true, function(data) {
           try {
-          var newSong = data.room.metadata.current_song._id;
-          var newSongName = songName = data.room.metadata.current_song.metadata.song;
-          bot.playlistAdd(newSong);
-          bot.speak('Added '+newSongName+' to the masters amusement list.');
+            var newSong = data.room.metadata.current_song._id;
+            var newSongName = songName = data.room.metadata.current_song.metadata.song;
+            bot.playlistAdd(newSong);
+            bot.speak('Added '+newSongName+' to the masters amusement list.');
           } catch (err) {
             errMsg(err);
           }
@@ -326,9 +326,12 @@ bot.on('speak', function (data) {
    
    // Respond to "/debug" command //for adding test sections //not required
    if ((data.text.match(/^\/debug$/)) && (data.userid == 'xxxxxxxxxxxxxxxxxxxxx')) { //put your user name here
-      bot.speak('debug reached');
-      bot.speak(theUsersList);
-
+      try {
+        bot.speak('debug reached');
+        bot.speak(theUsersList);
+      } catch (err) {
+        bot.speak(err.toString());
+      }
    }
 
 });
