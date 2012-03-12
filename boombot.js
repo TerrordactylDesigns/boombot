@@ -287,6 +287,22 @@ bot.on('speak', function (data) {
           }
        });
     }
+    //The below commands will modify the bots laptop. Set before he takes the stage. This command can be activated while the bot is DJ'ing, however, the laptop icon will not change until he leaves the stage and comes back.
+    //set the bots laptop to an iPhone
+    if (data.text.match(/phone up/i)) {
+      bot.speak('iPhone mode ready master.');
+      bot.modifyLaptop('iphone');
+    }
+    //set the bots laptop to a mac
+    if (data.text.match(/fruit up/i)) {
+      bot.speak('Apple mode ready master.');
+      bot.modifyLaptop('mac');
+    }
+    //set the bots laptop to linux
+    if (data.text.match(/nix up/i)) {
+      bot.speak('Ubuntu mode ready master.');
+      bot.modifyLaptop('linux');
+    }
   }
 });
 
