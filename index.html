@@ -53,7 +53,7 @@
     </div>
 
 
-<p>Need your own robot DJ? Want to welcome people to your room without typing? Want to impress the ladies? 
+<p>Need your own robot DJ? Want to welcome people to your room without typing? Want to auto tweet the current playing song? Want to impress the ladies? 
 
 You want BOOMBOT.........</p>
     
@@ -64,7 +64,9 @@ You want BOOMBOT.........</p>
 
          NPM<br />
 
-        https://github.com/alaingilbert/Turntable-API<br />
+        ttapi - https://github.com/alaingilbert/Turntable-API<br />
+
+        ntwitter - https://github.com/AvianFlu/ntwitter (If you want twitter integration) <br />
 </p>
     
 
@@ -89,6 +91,17 @@ Add to the arrays anything you want to add or change. Would be nice of you to ke
 
 path to the saved location,<br />
 node boombot.js</p>
+
+    <h2>Automated tweeting</h2>
+    <p>This feature is commented out by default for people who could care less about twitter. <br/> 
+    To use, read below and uncomment the twitter area at the bottom of the boombot.js file. <br/>
+
+Create a twitter acct if you don't already have one.<br/>
+Then go to dev.twitter.com and sign in with that acct and enable it for development.<br/>
+Create a new twitter application. VERY IMPORTANT: BEFORE you request your Oauth tokens set the app to read + write or read + write + direct message. <br/>
+Once you have your token keys, add them to the appropriatelly commented areas at the bottom of the file.<br/>
+
+The bot will now tweet the current track and artist with a #Turntablefm hashtag.     </p>
     
 
     
