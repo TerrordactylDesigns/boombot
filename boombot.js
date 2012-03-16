@@ -103,6 +103,16 @@ var meowList = [
 
 
 //main room bot actions and features
+//Allow boombot to become a psychic medium who can channel your spirit..... AKA.. IM him and he speaks it to the room
+bot.on('pmmed', function (data){ 
+  if (data.senderid == 'xxxxxxxxxxxxxxxxxxxx') { //put your user id here. you can remove this part if you want anyone to be able to talk through him via IM
+    try {
+      bot.speak(data.text);
+    } catch (err) {
+      bot.speak(err);
+    }
+  }
+});
 //welcome new people
 bot.on('registered',	function (data) { 
   if (data.user[0].userid == 'xxxxxxxxxxxxxxxxxxxx') { //put your bots user id
