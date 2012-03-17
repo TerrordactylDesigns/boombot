@@ -52,6 +52,54 @@ Once you have your token keys, add them to the appropriatelly commented areas at
 
 The bot will now tweet the current track and artist with a #Turntablefm hashtag.
 
+/*<><><><><><><><><><><><><><><><><><><>
+Commands
+<><><><><><><><><><><><><><><><><><><>*/
+Everyone:
+/hello - says hello back
+/dance - gives you a dance partner
+/boombot - information about the bot and how to acquire one
+/help - list the commands
+/rules - give the room rules
+/cheer - cheer for the song
+/boo - boo the song
+like a boss - display a random like a boss meme image
+/haters - display a random haters meme image
+meow - random super troopers meow reference
+/chuck - random chuck norris joke from the icndb API
+
+Administrator/"The Master":
+
+All commands for the master require the word boombot to trigger.
+Commands are not required to be in any order: example - This is a really good song boombot. Will trigger the 'boombot good' command.  
+
+djmode - make the bot get on stage and DJ
+
+getdown - make the bot get off stage
+
+skip - makes the bot skip the track it is playing
+
+good - remind the bot he's a good boy. Maybe he will kill you last during the robot apocalypse
+
+dance - make the bot upvote **this feature is not allowed and is de-activated by default**
+
+voodoo up - switch to the voodoo doll avatar (requires 100 dj points)
+
+kitten up - switch to the green kitten avatar (requires 300 dj points)
+
+alien up - switch to the alien avatar (requires 100 dj points)
+
+vampire up - switch to the vampire avatar (requires 100 dj points)
+
+addsong - adds the current playing song to the bots playlist
+
+phone up - set the bots laptop to iPhone
+
+fruit up - set the bots laptop to Mac
+
+nix up - set the bots laptop to Linux
+
+chrome up - sets the bots laptop to ChromeOS
 
 /*<><><><><><><><><><><><><><><><><><><>
 Notes
