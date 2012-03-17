@@ -21,6 +21,8 @@ var http = require('http');
 var bot = new Bot(AUTH, USERID, ROOMID);
 //object to hold user lists
 var theUsersList = { };
+//silent mode variable in case you want the bot to just be quiet
+var shutUp = false;
 
 //functions
 //error writer
@@ -115,12 +117,14 @@ bot.on('pmmed', function (data){
 });
 //welcome new people
 bot.on('registered',	function (data) { 
-  if (data.user[0].userid == 'xxxxxxxxxxxxxxxxxxxx') { //put your bots user id
-    bot.speak('WHO DARES SUMMON BOOM BOT?')
-  } else if (data.user[0].userid == 'xxxxxxxxxxxxxxxxxxxx') { //put your personal user id
-    bot.speak('ALL BOW BEFORE YourUserName! The master has arrived!') //replace with your own user name
-  } else {
-    bot.speak('Welcome '+data.user[0].name+'! Type /help to learn how to control me.'); //welcome the rest
+  if (shutUp == false) {
+    if (data.user[0].userid == 'xxxxxxxxxxxxxxxxxxxx') { //put your bots user id
+      bot.speak('WHO DARES SUMMON BOOM BOT?')
+    } else if (data.user[0].userid == 'xxxxxxxxxxxxxxxxxxxx') { //put your personal user id
+      bot.speak('ALL BOW BEFORE YourUserName! The master has arrived!') //replace with your own user name
+    } else {
+      bot.speak('Welcome '+data.user[0].name+'! Type /help to learn how to control me.'); //welcome the rest
+    }
   }
 });
 
@@ -134,94 +138,109 @@ bot.on('registered',	function (data) {
 bot.on('booted_user', function (data){ bot.speak('YEAH, GET THAT DJ OUTTTTTTTTTAAAA HEEERRRREEEEEEE!'); });
 //new DJ hype-man
 bot.on('add_dj', function (data) { 
-  if (data.user[0].userid == 'xxxxxxxxxxxxxxxxxxxxxx') { //put your bots uid here
-    bot.speak('Aural destruction mode activated.');
-  } else if (data.user[0].userid == 'xxxxxxxxxxxxxxxxxxxxx') { //put your personal uid here 
-    bot.speak('The Master has taken the stage! Bow before YourUserName!'); //replace with your user name
-  } else {
-    bot.speak(data.user[0].name+' has taken the stage to amuse my master.'); //announce the new dj
+  if (shutUp = false) {
+    if (data.user[0].userid == 'xxxxxxxxxxxxxxxxxxxxxx') { //put your bots uid here
+      bot.speak('Aural destruction mode activated.');
+    } else if (data.user[0].userid == 'xxxxxxxxxxxxxxxxxxxxx') { //put your personal uid here 
+      bot.speak('The Master has taken the stage! Bow before YourUserName!'); //replace with your user name
+    } else {
+      bot.speak(data.user[0].name+' has taken the stage to amuse my master.'); //announce the new dj
+    }
   }
 });
 //thanks for DJ'ing
 bot.on('rem_dj', function (data) { 
-  if (data.user[0].userid == 'xxxxxxxxxxxxxxxxxxxxxx') { //put your bots uid here
-    //do nothing. or write in something to have him say he has stepped down.
-  } else {
-    bot.speak('Everyone give it up for '+data.user[0].name+'!'); //thanks the dj when they step off stage. note that if this is active the removed dj announcement will never happen.
+  if (shutUp == false) {
+    if (data.user[0].userid == 'xxxxxxxxxxxxxxxxxxxxxx') { //put your bots uid here
+      //do nothing. or write in something to have him say he has stepped down.
+    } else {
+      bot.speak('Everyone give it up for '+data.user[0].name+'!'); //thanks the dj when they step off stage. note that if this is active the removed dj announcement will never happen.
+    }
   }
 }); 
 
 //chat bot area
 bot.on('speak', function (data) {
-   
-   // Respond to "/hello" command
-   if (data.text.match(/^\/hello$/)) {
-      bot.speak('Hey! How are you '+data.name+' ?');
-   }
-   // Respond to "/boombot" command
-   if (data.text.match(/^\/boombot$/)) {
-      bot.speak('BOOM BOT v6.6.6 \n\r Coded by: http://GPlus.to/TerrordactylDesigns/ \n\r Acquire your own at https://github.com/TerrordactylDesigns/boombot'); //note that line break and return does not appear in the web browser. However, it does appear on iPhone chat window.
-   }
-   // Respond to "/help" command
-   if (data.text.match(/^\/help$/)) {
-   	  bot.speak('My current command list is /hello, /help, /rules, /boo, /cheer, /haters, /meow, /chuck, /boombot. Plus a few hidden ones ;) remember to check for new updates!');
-   }
-   // Respond to "/rules" command
-   if (data.text.match(/^\/rules$/)) {
-   	  bot.speak('Its our room, and our rules..\n\r Suck it up cupcake. \n\r Your room moderators are: enter them here'); //fill in with your information. line breaks and carriage returns will not display on the web browser but will on iPhone chat window.
-   }
-   // Respond to "/cheer" command
-   if (data.text.match(/^\/cheer$/)) {
-   	  var rndm = (Math.round((Math.random()*1)+1));
-        bot.speak(cheerList[rndm]);
-   }
-   // Respond to "/boo" command
-   if (data.text.match(/^\/boo$/)) {
-        var rndm = (Math.round((Math.random()*1)+1));
-        bot.speak(booList[rndm]);
-   }
-   // Respond to "like a boss" command  //script is a direct copy from https://github.com/github/hubot-scripts
-   if (data.text.match(/like a boss/i)) {
-      var rndm = (Math.round((Math.random()*8)+1));
-        bot.speak(bossList[rndm]);
-   }
-   //Sho NUFF!
-   if ((data.text.match(/am i the meanest/i)) || (data.text.match(/am i the baddest/i)) || (data.text.match(/am i the prettiest/i)) || (data.text.match(/who am i/i)) || (data.text.match(/i cant hear you/i))) { //Im a big fan of that movie.... This will only respond 2-3 times in a row before you have to say something else in chat for it to continue. Unsure why yet. Will continue to work on it.
-        bot.speak('Sho NUFF!!!');
-   }
-   // Respond to "/haters" command //script is a direct copy from https://github.com/github/hubot-scripts
-   if (data.text.match(/^\/haters$/)) {
-      var rndm = (Math.round((Math.random()*8)+1));
-        bot.speak(hatersList[rndm]);
-   }
-   // Respond to "/meow" command
-   if (data.text.match(/^\/meow$/)) {
-      var rndm = (Math.round((Math.random()*8)+1));
-        bot.speak(meowList[rndm]);
-   }
-   // Respond to /chuck
-   if (data.text.match(/^\/chuck$/)) {
-      var options = {
-        host: 'api.icndb.com',
-        port: 80,
-        path: '/jokes/random'
-      };
+   if (shutUp == false) {
+     // Respond to "/hello" command
+     if (data.text.match(/^\/hello$/)) {
+        bot.speak('Hey! How are you '+data.name+' ?');
+     }
+     // Respond to "/boombot" command
+     if (data.text.match(/^\/boombot$/)) {
+        bot.speak('BOOM BOT v6.6.6 \n\r Coded by: http://GPlus.to/TerrordactylDesigns/ \n\r Acquire your own at https://github.com/TerrordactylDesigns/boombot'); //note that line break and return does not appear in the web browser. However, it does appear on iPhone chat window.
+     }
+     // Respond to "/help" command
+     if (data.text.match(/^\/help$/)) {
+     	  bot.speak('My current command list is /hello, /help, /rules, /boo, /cheer, /haters, /meow, /chuck, /boombot. Plus a few hidden ones ;) remember to check for new updates!');
+     }
+     // Respond to "/rules" command
+     if (data.text.match(/^\/rules$/)) {
+     	  bot.speak('Its our room, and our rules..\n\r Suck it up cupcake. \n\r Your room moderators are: enter them here'); //fill in with your information. line breaks and carriage returns will not display on the web browser but will on iPhone chat window.
+     }
+     // Respond to "/cheer" command
+     if (data.text.match(/^\/cheer$/)) {
+     	  var rndm = (Math.round((Math.random()*1)+1));
+          bot.speak(cheerList[rndm]);
+     }
+     // Respond to "/boo" command
+     if (data.text.match(/^\/boo$/)) {
+          var rndm = (Math.round((Math.random()*1)+1));
+          bot.speak(booList[rndm]);
+     }
+     // Respond to "like a boss" command  //script is a direct copy from https://github.com/github/hubot-scripts
+     if (data.text.match(/like a boss/i)) {
+        var rndm = (Math.round((Math.random()*8)+1));
+          bot.speak(bossList[rndm]);
+     }
+     //Sho NUFF!
+     if ((data.text.match(/am i the meanest/i)) || (data.text.match(/am i the baddest/i)) || (data.text.match(/am i the prettiest/i)) || (data.text.match(/who am i/i)) || (data.text.match(/i cant hear you/i))) { //Im a big fan of that movie.... This will only respond 2-3 times in a row before you have to say something else in chat for it to continue. Unsure why yet. Will continue to work on it.
+          bot.speak('Sho NUFF!!!');
+     }
+     // Respond to "/haters" command //script is a direct copy from https://github.com/github/hubot-scripts
+     if (data.text.match(/^\/haters$/)) {
+        var rndm = (Math.round((Math.random()*8)+1));
+          bot.speak(hatersList[rndm]);
+     }
+     // Respond to "/meow" command
+     if (data.text.match(/^\/meow$/)) {
+        var rndm = (Math.round((Math.random()*8)+1));
+          bot.speak(meowList[rndm]);
+     }
+     // Respond to /chuck
+     if (data.text.match(/^\/chuck$/)) {
+        var options = {
+          host: 'api.icndb.com',
+          port: 80,
+          path: '/jokes/random'
+        };
 
-    http.get(options, function(res) {
-      res.on('data', function(chunk) {  
-                var chuck = JSON.parse(chunk);
-                bot.speak(chuck.value.joke);
-           });
+      http.get(options, function(res) {
+        res.on('data', function(chunk) {  
+                  var chuck = JSON.parse(chunk);
+                  bot.speak(chuck.value.joke);
+             });
 
-    }).on('error', function(e) {
-      bot.speak("Got error: " + e.message);
-    });
+      }).on('error', function(e) {
+        bot.speak("Got error: " + e.message);
+      });
+    }
   }
 });
 // DJ control
 //this next section looks anywhere in the sentence for the word boombot. if it was said by your user id, it will then look for any of the commands and react.
 bot.on('speak', function (data) {
   if ((data.text.match(/boombot/i)) &&(data.userid == 'xxxxxxxxxxxxxxxxxx')) { //enter your user id in here. unless you want the whole room drunk with power.
+    //tell the bot to enter silent mode (doesnt announce users or welcome people or respond to commands other than admin commands)
+    if (data.text.match(/shutup/i)) {
+      shutUp = true;
+      bot.speak('Silent mode activated.');
+    }
+    //let the bot speak again
+    if (data.text.match(/speakup/i)) {
+      shutUp = false;
+      bot.speak('Chatterbox mode activated.')
+    }
     //makes the bot get on stage
     if (data.text.match(/djmode/i)) {                   
       bot.speak('Amuse my master mode activated.');
@@ -312,6 +331,11 @@ bot.on('speak', function (data) {
     if (data.text.match(/nix up/i)) {
       bot.speak('Ubuntu mode ready master.');
       bot.modifyLaptop('linux');
+    }
+    //set the bots laptop to chromeOS
+    if (data.text.match(/chrome up/i)) {
+      bot.speak('Riding on chrome son.');
+      bot.modifyLaptop('chrome');
     }
   }
 });
