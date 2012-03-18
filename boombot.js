@@ -12,9 +12,11 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 //variables
 //bot and room information - obtain from http://alaingilbert.github.com/Turntable-API/bookmarklet.html
 var Bot    = require('ttapi');
-var AUTH   = 'auth+live+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx';
-var USERID = 'xxxxxxxxxxxxxxxxxxxxxxxx';
-var ROOMID = 'xxxxxxxxxxxxxxxxxxxxxxxx';
+var AUTH   = 'auth+live+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'; //put the auth+live ID here for your bots acct
+var USERID = 'xxxxxxxxxxxxxxxxxxxxxxxx'; //put the bots user id here
+var ROOMID = 'xxxxxxxxxxxxxxxxxxxxxxxx'; //put your turntable rooms id here
+var MASTERID = 'xxxxxxxxxxxxxxxxxxxxxxx'; //put your personal user id here
+var MASTERNAME = 'YourUserName'; //put your personal user name here
 //for API calls
 var http = require('http'); 
 // load the bot
@@ -107,7 +109,7 @@ var meowList = [
 //main room bot actions and features
 //Allow boombot to become a psychic medium who can channel your spirit..... AKA.. IM him and he speaks it to the room
 bot.on('pmmed', function (data){ 
-  if (data.senderid == 'xxxxxxxxxxxxxxxxxxxx') { //put your user id here. you can remove this part if you want anyone to be able to talk through him via IM
+  if (data.senderid == MASTERID) { 
     try {
       bot.speak(data.text);
     } catch (err) {
@@ -118,10 +120,10 @@ bot.on('pmmed', function (data){
 //welcome new people
 bot.on('registered',	function (data) { 
   if (shutUp == false) {
-    if (data.user[0].userid == 'xxxxxxxxxxxxxxxxxxxx') { //put your bots user id
+    if (data.user[0].userid == USERID) { //boombot announces himself
       bot.speak('WHO DARES SUMMON BOOM BOT?')
-    } else if (data.user[0].userid == 'xxxxxxxxxxxxxxxxxxxx') { //put your personal user id
-      bot.speak('ALL BOW BEFORE YourUserName! The master has arrived!') //replace with your own user name
+    } else if (data.user[0].userid == MASTERID) { //if the master arrives announce him specifically
+      bot.speak('ALL BOW BEFORE '+MASTERNAME+'! The master has arrived!') 
     } else {
       bot.speak('Welcome '+data.user[0].name+'! Type /help to learn how to control me.'); //welcome the rest
     }
@@ -139,10 +141,10 @@ bot.on('booted_user', function (data){ bot.speak('YEAH, GET THAT DJ OUTTTTTTTTTA
 //new DJ hype-man
 bot.on('add_dj', function (data) { 
   if (shutUp = false) {
-    if (data.user[0].userid == 'xxxxxxxxxxxxxxxxxxxxxx') { //put your bots uid here
+    if (data.user[0].userid == USERID) { //the bot will announce he is DJing
       bot.speak('Aural destruction mode activated.');
-    } else if (data.user[0].userid == 'xxxxxxxxxxxxxxxxxxxxx') { //put your personal uid here 
-      bot.speak('The Master has taken the stage! Bow before YourUserName!'); //replace with your user name
+    } else if (data.user[0].userid == MASTERID) { //the bot will announce you specially
+      bot.speak('The Master has taken the stage! Bow before '+MASTERNAME+'!'); 
     } else {
       bot.speak(data.user[0].name+' has taken the stage to amuse my master.'); //announce the new dj
     }
@@ -151,7 +153,7 @@ bot.on('add_dj', function (data) {
 //thanks for DJ'ing
 bot.on('rem_dj', function (data) { 
   if (shutUp == false) {
-    if (data.user[0].userid == 'xxxxxxxxxxxxxxxxxxxxxx') { //put your bots uid here
+    if (data.user[0].userid == USERID) { 
       //do nothing. or write in something to have him say he has stepped down.
     } else {
       bot.speak('Everyone give it up for '+data.user[0].name+'!'); //thanks the dj when they step off stage. note that if this is active the removed dj announcement will never happen.
@@ -214,7 +216,7 @@ bot.on('speak', function (data) {
           port: 80,
           path: '/jokes/random'
         };
-
+      //make the API call and parse the JSON result
       http.get(options, function(res) {
         res.on('data', function(chunk) {  
                   var chuck = JSON.parse(chunk);
@@ -230,7 +232,7 @@ bot.on('speak', function (data) {
 // DJ control
 //this next section looks anywhere in the sentence for the word boombot. if it was said by your user id, it will then look for any of the commands and react.
 bot.on('speak', function (data) {
-  if ((data.text.match(/boombot/i)) &&(data.userid == 'xxxxxxxxxxxxxxxxxx')) { //enter your user id in here. unless you want the whole room drunk with power.
+  if ((data.text.match(/boombot/i)) &&(data.userid == MASTERID)) { 
     //tell the bot to enter silent mode (doesnt announce users or welcome people or respond to commands other than admin commands)
     if (data.text.match(/shutup/i)) {
       shutUp = true;
@@ -359,7 +361,7 @@ bot.on('update_votes', function (data) {
 bot.on('speak', function (data) {
    
    // Respond to "/debug" command //for adding test sections //not required
-   if ((data.text.match(/^\/debug$/)) && (data.userid == 'xxxxxxxxxxxxxxxxxxxxx')) { //put your user name here
+   if ((data.text.match(/^\/debug$/)) && (data.userid == MASTERID)) { 
       try {
         bot.speak('debug reached');
         bot.speak(theUsersList);
