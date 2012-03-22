@@ -174,7 +174,7 @@ bot.on('speak', function (data) {
      }
      // Respond to "/help" command
      if (data.text.match(/^\/help$/)) {
-     	  bot.speak('My current command list is /hello, /help, /rules, /boo, /cheer, /haters, /meow, /chuck, /boombot. Plus a few hidden ones ;) remember to check for new updates!');
+     	  bot.speak('My current command list is /hello, /help, /rules, /boo, /cheer, /haters, /meow, /chuck, /winning, /boombot. Plus a few hidden ones ;) remember to check for new updates!');
      }
      // Respond to "/rules" command
      if (data.text.match(/^\/rules$/)) {
@@ -227,6 +227,23 @@ bot.on('speak', function (data) {
         bot.speak("Got error: " + e.message);
       });
     }
+    // Respond to /winning
+    if (data.text.match(/^\/winning$/)) {
+      var options = {
+        host: 'sheenlipsum.com',
+        port: 80,
+        path: '/getquote'
+      };
+
+    http.get(options, function(res) {
+      res.on('data', function(chunk) {  
+                bot.speak(chunk);
+           });
+
+    }).on('error', function(e) {
+      bot.speak("Got error: " + e.message);
+    });
+  }
   }
 });
 // DJ control
