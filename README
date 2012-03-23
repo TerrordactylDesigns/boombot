@@ -53,6 +53,7 @@ The bot will now tweet the current track and artist with a #Turntablefm hashtag.
 Commands
 <><><><><><><><><><><><><><><><><><><>*/
 Everyone:
+/lyrics - returns the first line of the current song and a link to the full lyrics
 /hello - says hello back
 /dance - gives you a dance partner
 /boombot - information about the bot and how to acquire one

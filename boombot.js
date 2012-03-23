@@ -209,6 +209,40 @@ bot.on('speak', function (data) {
         var rndm = (Math.round((Math.random()*8)+1));
           bot.speak(meowList[rndm]);
      }
+     // Respond to "/lyrics" command
+     if (data.text.match(/^\/lyrics$/)) {
+       bot.roomInfo(true, function(data) { 
+         //get the current song name and artist, then replace blank spaces with underscores
+         var currSong = data.room.metadata.current_song.metadata.song;
+         var currArtist = data.room.metadata.current_song.metadata.artist;
+         currSong = currSong.replace(" ", "_");
+         currArtist = currArtist.replace(" ", "_");
+         //build the api call object
+         var options = {
+           host: 'lyrics.wikia.com',
+           port: 80,
+           path: '/api.php?artist=' + currArtist + '&song=' + currSong + '&fmt=json'
+         };
+         //call the api
+         http.get(options, function(res) {
+           res.on('data', function(chunk) {  
+                try {
+                  //lyrics wiki isnt true JSON so JSON.parse chokes
+                  var obj = eval("(" + chunk + ')');
+                  //give back the lyrics. the api only gives you the first few words due to licensing
+                  bot.speak(obj.lyrics);
+                  //return the url to the full lyrics
+                  bot.speak(obj.url);   
+                  console.log(obj);
+                } catch (err) {
+                  bot.speak(err);
+                }
+           });
+         }).on('error', function(e) {
+           bot.speak("Got error: " + e.message);
+         });
+       });
+     }
      // Respond to /chuck
      if (data.text.match(/^\/chuck$/)) {
         var options = {
