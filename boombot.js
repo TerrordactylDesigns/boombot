@@ -174,7 +174,7 @@ bot.on('speak', function (data) {
      }
      // Respond to "/help" command
      if (data.text.match(/^\/help$/)) {
-     	  bot.speak('My current command list is /hello, /help, /rules, /boo, /cheer, /haters, /meow, /chuck, /winning, /boombot. Plus a few hidden ones ;) remember to check for new updates!');
+     	  bot.speak('My current command list is /hello, /help, /rules, /lyrics, /boo, /cheer, /haters, /meow, /chuck, /winning, /boombot. Plus a few hidden ones ;) remember to check for new updates!');
      }
      // Respond to "/rules" command
      if (data.text.match(/^\/rules$/)) {
