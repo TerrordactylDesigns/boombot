@@ -215,8 +215,8 @@ bot.on('speak', function (data) {
          //get the current song name and artist, then replace blank spaces with underscores
          var currSong = data.room.metadata.current_song.metadata.song;
          var currArtist = data.room.metadata.current_song.metadata.artist;
-         currSong = currSong.replace(" ", "_");
-         currArtist = currArtist.replace(" ", "_");
+         currSong = currSong.replace(/ /g,"_");
+         currArtist = currArtist.replace(/ /g,"_");
          //build the api call object
          var options = {
            host: 'lyrics.wikia.com',
