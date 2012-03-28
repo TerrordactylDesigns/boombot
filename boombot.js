@@ -174,7 +174,7 @@ bot.on('speak', function (data) {
      }
      // Respond to "/help" command
      if (data.text.match(/^\/help$/)) {
-     	  bot.speak('My current command list is /hello, /help, /rules, /lyrics, /boo, /cheer, /haters, /meow, /chuck, /winning, /boombot. Plus a few hidden ones ;) remember to check for new updates!');
+     	  bot.speak('My current command list is /hello, /help, /rules, /lyrics, /video, /boo, /cheer, /haters, /meow, /chuck, /winning, /boombot. Plus a few hidden ones ;) remember to check for new updates!');
      }
      // Respond to "/rules" command
      if (data.text.match(/^\/rules$/)) {
@@ -243,6 +243,41 @@ bot.on('speak', function (data) {
          });
        });
      }
+     // Respond to "/video" command
+    if (data.text.match(/^\/video$/)) {
+      bot.roomInfo(true, function(data) { 
+        var queryResponse = '';
+        var currSong = data.room.metadata.current_song.metadata.song;
+        var currArtist = data.room.metadata.current_song.metadata.artist;
+        currSong = currSong.replace(/ /g,"_");
+        currArtist = currArtist.replace(/ /g,"_");
+        currSong = currSong.replace(/\./g,"");
+        currArtist = currArtist.replace(/\./g,"");
+        var options = {
+          host: 'gdata.youtube.com',
+          port: 80,
+          path: "/feeds/api/videos?q=" + currArtist + "_" + currSong + "&max-results=1&v=2&prettyprint=true&alt=json"
+        };
+        console.log(options);
+        http.get(options, function(response) {
+          console.log("Got response:" + response.statusCode);
+          response.on('data', function(chunk) {  
+              try {
+                queryResponse += chunk;
+              } catch (err) {
+                bot.speak(err);
+              }
+          });
+          response.on('end', function(){
+            var ret = JSON.parse(queryResponse);
+            bot.speak(ret.feed.entry[0].media$group.media$content[0].url);
+          });
+
+        }).on('error', function(e) {
+          bot.speak("Got error: " + e.message);
+        });
+      });
+    }
      // Respond to /chuck
      if (data.text.match(/^\/chuck$/)) {
         var options = {
