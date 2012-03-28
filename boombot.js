@@ -217,6 +217,8 @@ bot.on('speak', function (data) {
          var currArtist = data.room.metadata.current_song.metadata.artist;
          currSong = currSong.replace(/ /g,"_");
          currArtist = currArtist.replace(/ /g,"_");
+         currSong = currSong.replace(/\./g,"");
+         currArtist = currArtist.replace(/\./g,"");
          //build the api call object
          var options = {
            host: 'lyrics.wikia.com',
