@@ -182,17 +182,17 @@ bot.on('speak', function (data) {
      }
      // Respond to "/cheer" command
      if (data.text.match(/^\/cheer$/)) {
-     	  var rndm = (Math.round((Math.random()*1)+1));
+     	  var rndm = Math.floor(Math.random() * 3);
           bot.speak(cheerList[rndm]);
      }
      // Respond to "/boo" command
      if (data.text.match(/^\/boo$/)) {
-          var rndm = (Math.round((Math.random()*1)+1));
+          var rndm = Math.floor(Math.random() * 3);
           bot.speak(booList[rndm]);
      }
      // Respond to "like a boss" command  //script is a direct copy from https://github.com/github/hubot-scripts
      if (data.text.match(/like a boss/i)) {
-        var rndm = (Math.round((Math.random()*8)+1));
+        var rndm = Math.floor(Math.random() * 10);
           bot.speak(bossList[rndm]);
      }
      //Sho NUFF!
@@ -201,12 +201,12 @@ bot.on('speak', function (data) {
      }
      // Respond to "/haters" command //script is a direct copy from https://github.com/github/hubot-scripts
      if (data.text.match(/^\/haters$/)) {
-        var rndm = (Math.round((Math.random()*8)+1));
+        var rndm = Math.floor(Math.random() * 10);
           bot.speak(hatersList[rndm]);
      }
      // Respond to "/meow" command
      if (data.text.match(/^\/meow$/)) {
-        var rndm = (Math.round((Math.random()*8)+1));
+        var rndm = Math.floor(Math.random() * 10);
           bot.speak(meowList[rndm]);
      }
      // Respond to "/lyrics" command
