@@ -174,7 +174,7 @@ bot.on('speak', function (data) {
      }
      // Respond to "/help" command
      if (data.text.match(/^\/help$/)) {
-     	  bot.speak('My current command list is /hello, /help, /rules, /lyrics, /video, /boo, /cheer, /haters, /meow, /chuck, /winning, /boombot. Plus a few hidden ones ;) remember to check for new updates!');
+     	  bot.speak('My current command list is /hello, /help, /rules, /lyrics, /video, /boo, /cheer, /haters, meow, /rich, /chuck, /winning, /boombot. Plus a few hidden ones ;) remember to check for new updates!');
      }
      // Respond to "/rules" command
      if (data.text.match(/^\/rules$/)) {
@@ -205,9 +205,13 @@ bot.on('speak', function (data) {
           bot.speak(hatersList[rndm]);
      }
      // Respond to "/meow" command
-     if (data.text.match(/^\/meow$/)) {
+     if ((data.text.match(/meow/i))  && (data.userid != USERID)) {
         var rndm = Math.floor(Math.random() * 10);
           bot.speak(meowList[rndm]);
+     }
+     // Respond to "/rich" command
+     if (data.text.match(/^\/rich$/)) {
+        bot.speak("I don't think you realize how rich he really is. In fact, I should put on a monocle.  /monocle");
      }
      // Respond to "/lyrics" command
      if (data.text.match(/^\/lyrics$/)) {
