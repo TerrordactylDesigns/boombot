@@ -276,7 +276,12 @@ bot.on('speak', function (data) {
           });
           response.on('end', function(){
             var ret = JSON.parse(queryResponse);
-            bot.speak(ret.feed.entry[0].media$group.media$content[0].url);
+            //if the return is a playlist the JSON is entirely different. For now I am just error handling this.
+            try {
+              bot.speak(ret.feed.entry[0].media$group.media$content[0].url);
+            } catch (err) {
+              bot.speak("Sorry. The return was a playlist. This is unsupported currently.");
+            }
           });
 
         }).on('error', function(e) {
