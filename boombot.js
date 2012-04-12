@@ -204,10 +204,23 @@ bot.on('speak', function (data) {
         var rndm = Math.floor(Math.random() * 10);
           bot.speak(hatersList[rndm]);
      }
-     // Respond to "/meow" command
+     // Respond to "meow" command
      if ((data.text.match(/meow/i))  && (data.userid != USERID)) {
         var rndm = Math.floor(Math.random() * 10);
           bot.speak(meowList[rndm]);
+     }
+     //below is the classic scene from South Park... had to be done.
+     // Respond to "friend" command
+     if ((data.text.match(/friend/i))  && (data.userid != '4f4d30c1a3f7510235000513')){
+        bot.speak("I'm not your friend, guy.");
+     }
+     // Respond to "buddy" command
+     if ((data.text.match(/buddy/i))  && (data.userid != '4f4d30c1a3f7510235000513')){
+        bot.speak("I'm not your buddy, friend.");
+     }
+     // Respond to "guy" command
+     if ((data.text.match(/guy/i))  && (data.userid != '4f4d30c1a3f7510235000513')){
+        bot.speak("I'm not your guy, buddy.");
      }
      // Respond to "/rich" command
      if (data.text.match(/^\/rich$/)) {
