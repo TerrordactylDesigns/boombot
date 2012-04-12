@@ -55,6 +55,7 @@ Commands
 Everyone:
 /lyrics - returns the first line of the current song and a link to the full lyrics
 /video - returns a link to a youtube search for the current song playing
+/google <search terms> returns a link to a "Let me google that for you" google search
 /hello - says hello back
 /dance - gives you a dance partner
 /boombot - information about the bot and how to acquire one

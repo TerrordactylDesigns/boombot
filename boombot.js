@@ -324,6 +324,19 @@ bot.on('speak', function (data) {
       bot.speak("Got error: " + e.message);
     });
   }
+
+    //Respond to "/google <query>"
+    if (data.text.match(/^\/google/)) {
+      //chop out the query and parse it
+      var searchQueryArray = data.text.split('/google ');
+      var searchQuery = searchQueryArray[1];
+      //replace the most common special characters and turn spaces into +
+      searchQuery = searchQuery.replace(/\'/g,"%27").replace(/;/g,"%3B").replace(/#/g,"%23").replace(/@/g,"%40").replace(/&/g,"%26").replace(/</g,"%3C").replace(/>/g,"%3E").replace(/=/g,"%3D").replace(/\+/g,"%2B");
+      //replace spaces with +
+      searchQuery = searchQuery.split(' ').join('+');
+      bot.speak("http://lmgtfy.com/?q=" + searchQuery); //returns a link to let me google that for you for both your search and my amusement of delivery method
+    }
+
   }
 });
 // DJ control
