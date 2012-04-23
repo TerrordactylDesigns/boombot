@@ -61,6 +61,16 @@ bot.on('deregistered', function (data) {
    var user = data.user[0];
    delete theUsersList['b' + user.userid];
 });
+//on song end we will announce the votes for the last song
+bot.on('endsong', function (data) { 
+  console.log(data);
+  try {
+    bot.speak(data.room.metadata.current_song.metadata.song + " by " + data.room.metadata.current_song.metadata.artist + " got :+1: " + data.room.metadata.upvotes + " :-1: " +  data.room.metadata.downvotes);
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 //END of user List section
 
 //arrays for commands
@@ -268,8 +278,8 @@ bot.on('speak', function (data) {
         var queryResponse = '';
         var currSong = data.room.metadata.current_song.metadata.song;
         var currArtist = data.room.metadata.current_song.metadata.artist;
-        currSong = currSong.replace(/ /g,"_");
-        currArtist = currArtist.replace(/ /g,"_");
+        currSong = currSong.replace(/ /g,"_").replace(/#/g,"%23");
+        currArtist = currArtist.replace(/ /g,"_").replace(/#/g,"%23");
         currSong = currSong.replace(/\./g,"");
         currArtist = currArtist.replace(/\./g,"");
         var options = {
@@ -434,7 +444,7 @@ bot.on('speak', function (data) {
           try {
             var newSong = data.room.metadata.current_song._id;
             var newSongName = songName = data.room.metadata.current_song.metadata.song;
-            bot.playlistAdd(newSong);
+            bot.snag();
             bot.speak('Added '+newSongName+' to the masters amusement list.');
           } catch (err) {
             errMsg(err);
