@@ -445,6 +445,7 @@ bot.on('speak', function (data) {
             var newSong = data.room.metadata.current_song._id;
             var newSongName = songName = data.room.metadata.current_song.metadata.song;
             bot.snag();
+            bot.playlistAdd(newSong);
             bot.speak('Added '+newSongName+' to the masters amusement list.');
           } catch (err) {
             errMsg(err);
