@@ -25,6 +25,8 @@ var bot = new Bot(AUTH, USERID, ROOMID);
 var theUsersList = { };
 //silent mode variable in case you want the bot to just be quiet
 var shutUp = false;
+//integer for holding a snag counter for the announcer
+var snagCounter = 0;
 
 //functions
 //error writer
@@ -61,11 +63,15 @@ bot.on('deregistered', function (data) {
    var user = data.user[0];
    delete theUsersList['b' + user.userid];
 });
+//on song start we will reset the snagCounter
+bot.on('newsong', function (data){ 
+  snagCounter = 0;
+});
 //on song end we will announce the votes for the last song
 bot.on('endsong', function (data) { 
   console.log(data);
   try {
-    bot.speak(data.room.metadata.current_song.metadata.song + " by " + data.room.metadata.current_song.metadata.artist + " got :+1: " + data.room.metadata.upvotes + " :-1: " +  data.room.metadata.downvotes);
+    bot.speak(data.room.metadata.current_song.metadata.song + " by " + data.room.metadata.current_song.metadata.artist + " got :+1: " + data.room.metadata.upvotes + " :-1: " +  data.room.metadata.downvotes + " <3 " + snagCounter);
   } catch (err) {
     console.log(err);
   }
