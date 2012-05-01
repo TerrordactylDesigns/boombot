@@ -67,6 +67,10 @@ bot.on('deregistered', function (data) {
 bot.on('newsong', function (data){ 
   snagCounter = 0;
 });
+//increment the snag counter when a song is snagged
+bot.on('snagged', function (data) { 
+  snagCounter++;
+});
 //on song end we will announce the votes for the last song
 bot.on('endsong', function (data) { 
   console.log(data);
