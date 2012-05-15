@@ -49,19 +49,19 @@ bot.on('roomChanged', function (data) {
    var users = data.users;
    for (var i=0; i<users.length; i++) {
       var user = users[i];
-      theUsersList['b' + user.userid] = user;
+      theUsersList[user.userid] = user;
       console.log('added ' + user + ' to theUsersList');
    }
 });
 
 bot.on('registered', function (data) {
    var user = data.user[0];
-   theUsersList['b' + user.userid] = user;
+   theUsersList[user.userid] = user;
 });
 
 bot.on('deregistered', function (data) {
    var user = data.user[0];
-   delete theUsersList['b' + user.userid];
+   delete theUsersList[user.userid];
 });
 //on song start we will reset the snagCounter
 bot.on('newsong', function (data){ 
@@ -190,7 +190,7 @@ bot.on('speak', function (data) {
      }
      // Respond to "/boombot" command
      if (data.text.match(/^\/boombot$/)) {
-        bot.speak('BOOM BOT v6.6.6 \n\r Coded by: http://GPlus.to/TerrordactylDesigns/ \n\r Acquire your own at https://github.com/TerrordactylDesigns/boombot'); //note that line break and return does not appear in the web browser. However, it does appear on iPhone chat window.
+        bot.speak('BOOM BOT v1.2.3 \n\r Coded by: http://GPlus.to/TerrordactylDesigns/ \n\r Acquire your own at https://github.com/TerrordactylDesigns/boombot'); //note that line break and return does not appear in the web browser. However, it does appear on iPhone chat window.
      }
      // Respond to "/help" command
      if (data.text.match(/^\/help$/)) {
@@ -492,11 +492,12 @@ bot.on('update_votes', function (data) {
   if (data.room.metadata.votelog[0].toString().match(/down/i)) {
     try {
       var uncut = data.room.metadata.votelog[0].toString();
-      var chopped = 'b' + uncut.substring(0, uncut.indexOf(','));
+      var chopped = uncut.substring(0, uncut.indexOf(','));
       var jerk = theUsersList[chopped].name
       bot.speak(jerk + ' thinks your song sucks..');    
     } catch (err) {
-      errMsg(err);
+      //initial downvotes go by without a user ID to trap. Also if you have never upvoted your downvotes go by with no ID.
+      bot.speak("Ouch. Someone thinks you're lame.....")
     }
   } 
 });
