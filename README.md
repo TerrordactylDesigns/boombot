@@ -1,4 +1,4 @@
-#BOOM BOT v1.2.3
+#BOOM BOT v1.2.4
 
 A bot for turntable.fm
 Dj, welcome users,
@@ -96,6 +96,10 @@ Everyone:
 * nix up - set the bots laptop to Linux
 
 * chrome up - sets the bots laptop to ChromeOS
+
+##Automatic DJ mode
+
+Boom Bot will hop up to save the day if the room drops to just 1 active DJ. He will hop back down again when a second DJ takes the stage.
 
 ##Notes
 

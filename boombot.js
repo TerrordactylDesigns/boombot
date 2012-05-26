@@ -17,6 +17,7 @@ var USERID = 'xxxxxxxxxxxxxxxxxxxxxxxx'; //put the bots user id here
 var ROOMID = 'xxxxxxxxxxxxxxxxxxxxxxxx'; //put your turntable rooms id here
 var MASTERID = 'xxxxxxxxxxxxxxxxxxxxxxx'; //put your personal user id here
 var MASTERNAME = 'YourUserName'; //put your personal user name here
+var ROOMRULES = ''; //fill your rooms rules here and they will display on the /rules command
 //for API calls
 var http = require('http'); 
 // load the bot
@@ -27,12 +28,25 @@ var theUsersList = { };
 var shutUp = false;
 //integer for holding a snag counter for the announcer
 var snagCounter = 0;
+//DJMode switch, when set to true the bot will not step down from the decks until told too
+var DJMode = false;
+var versionNum = "1.2.4";
 
 //functions
 //error writer
 function errMsg(e) {
   console.log(e);
   bot.speak('Something went wrong. Tell master to check the fail logs.')
+}
+//modify the base array object to check if arrays contain a value
+Array.prototype.contains = function(obj) {
+    var i = this.length;
+    while (i--) {
+        if (this[i] == obj) {
+            return true;
+        }
+    }
+    return false;
 }
 
 //console messages for viewing room data in the console
@@ -145,7 +159,16 @@ bot.on('registered',	function (data) {
     } else if (data.user[0].userid == MASTERID) { //if the master arrives announce him specifically
       bot.speak('ALL BOW BEFORE '+MASTERNAME+'! The master has arrived!') 
     } else {
-      bot.speak('Welcome '+data.user[0].name+'! Type /help to learn how to control me.'); //welcome the rest
+      //check to see if the user is a mod, if not PM them
+      bot.roomInfo(true, function(data2) {
+        var modArray = data2.room.metadata.moderator_id;
+        if (modArray.contains(data.user[0].userid)) { //user is a room mod
+          bot.speak('Welcome back '+data.user[0].name+'!');
+        } else {   
+          bot.pm("Welcome "+data.user[0].name+"! Here are the rules: " + ROOMRULES, data.user[0].userid, function(data) { }); //PM the user
+          bot.speak('Welcome '+data.user[0].name+'! Type /help to learn how to control me.'); //welcome the rest
+        }
+      }):
     }
   }
 });
@@ -169,6 +192,23 @@ bot.on('add_dj', function (data) {
       bot.speak(data.user[0].name+' has taken the stage to amuse my master.'); //announce the new dj
     }
   }
+  //if more than 1 real DJ are on decks the bot hops down unless DJMode is true
+  bot.roomInfo(true, function(data) { 
+      var currDJs = data.room.metadata.djs;
+      var countDJs = currDJs.length;
+      var isDJ = false;
+      //have to loop through the array apparently no contains method in js
+      for (i = 0; i < countDJs; i++) {
+        if (currDJs[i] == USERID) {
+          isDJ = true;
+        }
+      }
+
+      if ((isDJ) && (DJMode == false) && (countDJs > 2)) {
+        bot.speak("Looks like the rooms a rockin, I'll step down.");
+        bot.remDj();
+      }
+  });
 });
 //thanks for DJ'ing
 bot.on('rem_dj', function (data) { 
@@ -179,6 +219,15 @@ bot.on('rem_dj', function (data) {
       bot.speak('Everyone give it up for '+data.user[0].name+'!'); //thanks the dj when they step off stage. note that if this is active the removed dj announcement will never happen.
     }
   }
+  //if the DJs drop to just 1 we will save youuuuuu
+  bot.roomInfo(true, function(data) { 
+      var currDJs = data.room.metadata.djs;
+      var countDJs = currDJs.length;
+      if (countDJs <= 1) {
+        bot.speak("Forget the whales! SAVE THE BEATS!");
+        bot.addDj();
+      }
+  });
 }); 
 
 //chat bot area
@@ -190,7 +239,7 @@ bot.on('speak', function (data) {
      }
      // Respond to "/boombot" command
      if (data.text.match(/^\/boombot$/)) {
-        bot.speak('BOOM BOT v1.2.3 \n\r Coded by: http://GPlus.to/TerrordactylDesigns/ \n\r Acquire your own at https://github.com/TerrordactylDesigns/boombot'); //note that line break and return does not appear in the web browser. However, it does appear on iPhone chat window.
+        bot.speak('BOOM BOT ' + versionNum + ' \n\r Coded by: http://GPlus.to/TerrordactylDesigns/ \n\r Acquire your own at https://github.com/TerrordactylDesigns/boombot'); //note that line break and return does not appear in the web browser. However, it does appear on iPhone chat window.
      }
      // Respond to "/help" command
      if (data.text.match(/^\/help$/)) {
@@ -198,7 +247,7 @@ bot.on('speak', function (data) {
      }
      // Respond to "/rules" command
      if (data.text.match(/^\/rules$/)) {
-     	  bot.speak('Its our room, and our rules..\n\r Suck it up cupcake. \n\r Your room moderators are: enter them here'); //fill in with your information. line breaks and carriage returns will not display on the web browser but will on iPhone chat window.
+     	  bot.speak(ROOMRULES); //fill in with your information. line breaks and carriage returns will not display on the web browser but will on iPhone chat window.
      }
      // Respond to "/cheer" command
      if (data.text.match(/^\/cheer$/)) {
@@ -388,12 +437,12 @@ bot.on('speak', function (data) {
     }
     //makes the bot get on stage
     if (data.text.match(/djmode/i)) {                   
-      bot.speak('Amuse my master mode activated.');
+      DJMode = true;
       bot.addDj();
     }
     //tells the bot to get off stage and get in the crowd
     if (data.text.match(/getdown/i)) {                  
-      bot.speak('Yes master.');
+      DJMode = false;
       bot.speak('Aural destruction mode de-activated.')
       bot.remDj();
     }
