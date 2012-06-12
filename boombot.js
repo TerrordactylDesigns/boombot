@@ -183,7 +183,7 @@ bot.on('registered',	function (data) {
 bot.on('booted_user', function (data){ bot.speak('YEAH, GET THAT DJ OUTTTTTTTTTAAAA HEEERRRREEEEEEE!'); });
 //new DJ hype-man
 bot.on('add_dj', function (data) { 
-  if (shutUp = false) {
+  if (shutUp == false) {
     if (data.user[0].userid == USERID) { //the bot will announce he is DJing
       bot.speak('Aural destruction mode activated.');
     } else if (data.user[0].userid == MASTERID) { //the bot will announce you specially
