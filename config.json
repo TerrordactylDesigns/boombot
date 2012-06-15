@@ -1,0 +1,24 @@
+{
+  "botinfo" :
+  {
+    "auth" : "auth+live+xxxxxxxxxxxxxxxxxxxxx",
+    "userid" : "xxxxxxxxxxxxxxxxxxxxxx",
+    "botname" : "boombot"
+  },
+  "roomid" : "xxxxxxxxxxxxxxxxxxxxxxxxxx",
+  "admin" : 
+  {
+    "userid" : "xxxxxxxxxxxxxxxxxxxxxxxx"
+  },
+  "consolelog" : true,
+  "responses" :
+  {
+    "rules" : "There is only one rule. I RULE! OK 2 rules: the lame button does exist, but don't ever touch it.You've been warned...",
+    "botwelcome" : "WHO DARES SUMMON BOOMBOT?!",
+    "adminwelcome" : "My master has arrived!",
+    "modwelcome" : "Welcome back.",
+    "welcome" : "Welcome to the room! Type /help to learn how to control me!",
+    "welcomepm" : "Welcome to the room. Please read the rules. Or, don't and get thrown out."
+  },
+  "version" : "1.3.0"
+}
