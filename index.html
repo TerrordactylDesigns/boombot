@@ -82,11 +82,11 @@ Log in as the bot and use this to get your bots uid, auth token, and your rooms 
 http://alaingilbert.github.com/Turntable-API/bookmarklet.html<br />
 Now use the same method to get your personal accounts user id for control of the bot<br />
 
-Open boombot.js in Sublime text 2 (Or your editor of choice... but really... go get sublime... its great..)<br />
-replace the xxxxxxxxxxxxxxxxxxxxxxxx's in the variables section with your bots auth, bot id, and your own personal user id. <br/>
-replace YourUserName with your own personal username (or whatever else you want the bot to call you) in the variables section.<br/>
+Open config.json in Sublime text 2 (Or your editor of choice... but really... go get sublime... its great..)<br />
+replace the xxxxxxxxxxxxxxxxxxxxxxxx's in the botinfo and roomid sections with your bots auth, bot id, and your own personal user id in the admin section. <br/>
+replace botname with what you want to call the bot in the botinfo section.<br/>
 
-Add to the arrays anything you want to add or change. Would be nice of you to keep the url to obtain your own copy under the 
+Add to the arrays in the boombot.js file anything you want to add or change. Would be nice of you to keep the url to obtain your own copy under the 
 /boombot command, but I won't hunt you down if you want it to go.<br />
 
 path to the saved location,<br />
@@ -128,7 +128,7 @@ The bot will now tweet the current track and artist with a #Turntablefm hashtag.
           <li>buddy, guy, friend - say any of these in chat and be met with the appropriate line from the South Park episode.</li>
         </ul><!-- / -->
         <h4>Administrator/"The Master"</h4>
-        <p>These commands are given as: boombot &lt;command&gt; </p>
+        <p>These commands are given as: &lt;botname&gt; &lt;command&gt; </p>
         <ul>
           <li>djmode - make the bot get on stage and DJ</li>
           <li>getdown - make the bot get off the stage</li>
@@ -144,6 +144,7 @@ The bot will now tweet the current track and artist with a #Turntablefm hashtag.
           <li>fruit up - sets the bots laptop to Mac</li>
           <li>nix up - sets the bots laptop to Linux/Ubuntu</li>
           <li>chrome up - sets the bots laptop to ChromeOS</li>
+          <li>droid up - sets the bots laptop to Android phone</li>
         </ul><!-- / -->
       </p>
     
