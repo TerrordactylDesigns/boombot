@@ -21,11 +21,11 @@ Log in as the bot and use this to get your bots uid, auth token, and your rooms 
 http://alaingilbert.github.com/Turntable-API/bookmarklet.html
 Now use the same method to get your personal accounts user id for control of the bot
 
-Open boombot.js in Sublime text 2 (Or your editor of choice... but really... go get sublime... its great..)
-replace the xxxxxxxxxxxxxxxxxxxxxxxx's in the variables section with your bots auth, bot id, and your own personal user id. 
-replace YourUserName with your own personal username (or whatever else you want the bot to call you) in the variables section.
+Open config.json in Sublime text 2 (Or your editor of choice... but really... go get sublime... its great..)
+replace the xxxxxxxxxxxxxxxxxxxxxxxx's in the botinfo section with your bots auth, bot id, and replace the xxxxxxxxxxxx's in the admin section your own personal user id. 
+replace botname in the botinfo section with what you want to call the bot.
 
-Add to the arrays and/or commands anything you want to add or change. Would be nice of you to keep the url to obtain your own copy under the /boombot command, but I won't hunt you down if you want it to go.
+Add to the arrays and/or commands in boombot.js anything you want to add or change. Would be nice of you to keep the url to obtain your own copy under the /boombot command, but I won't hunt you down if you want it to go.
 
 path to the saved location,
 node boombot.js
@@ -66,8 +66,8 @@ Everyone:
 
 ##Administrator/"The Master":
 
-	All commands for the master require the word boombot to trigger.
-	Commands are not required to be in any order: example - This is a really good song boombot. Will trigger the 'boombot good' command.  
+	All commands for the master require the setting for botname to trigger.
+	Commands are not required to be in any order: example - This is a really good song boombot. Will trigger the 'boombot good' command. (replace boombot with whatever you set in the config.json) 
 
 * djmode - make the bot get on stage and DJ
 
@@ -96,6 +96,8 @@ Everyone:
 * nix up - set the bots laptop to Linux
 
 * chrome up - sets the bots laptop to ChromeOS
+
+* droid up - sets the bots laptop to Android phone
 
 ##Automatic DJ mode
 
