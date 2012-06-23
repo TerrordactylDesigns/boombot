@@ -442,9 +442,10 @@ bot.on('speak', function (data) {
         });
     }
 
-      //Respond to "/google <query>"
-      if (data.text.match(/^\/google/)) {
-        //chop out the query and parse it
+    //Respond to "/google <query>"
+    if (data.text.match(/^\/google/)) {
+      //chop out the query and parse it
+      try {
         var searchQueryArray = data.text.split('/google ');
         var searchQuery = searchQueryArray[1];
         //replace the most common special characters and turn spaces into +
@@ -452,7 +453,11 @@ bot.on('speak', function (data) {
         //replace spaces with +
         searchQuery = searchQuery.split(' ').join('+');
         bot.speak("http://lmgtfy.com/?q=" + searchQuery); //returns a link to let me google that for you for both your search and my amusement of delivery method
+      } catch (ex) {
+        //sometimes people just put /google with no search terms.....
+        bot.speak("google what? Don't make me pick, you won't like what you see.....");
       }
+    }
   }
 
   
