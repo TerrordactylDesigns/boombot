@@ -203,9 +203,9 @@ bot.on('booted_user', function (data){
 
 bot.on('add_dj', function (data) { 
   if (shutUp == false) {
-    if (data.user[0].userid == USERID) { //the bot will announce he is DJing
+    if (data.user[0].userid == config.botinfo.userid) { //the bot will announce he is DJing
       bot.speak('Aural destruction mode activated.');
-    } else if (data.user[0].userid == MASTERID) { //the bot will announce you specially
+    } else if (data.user[0].userid == config.admin.userid) { //the bot will announce you specially
       bot.speak('The Master has taken the stage! Bow before '+data.user[0].name+'!'); 
     } else {
       bot.speak(data.user[0].name+' has taken the stage to amuse my master.'); //announce the new dj
@@ -218,7 +218,7 @@ bot.on('add_dj', function (data) {
       var isDJ = false;
       //have to loop through the array apparently no contains method in js
       for (i = 0; i < countDJs; i++) {
-        if (currDJs[i] == USERID) {
+        if (currDJs[i] == config.botinfo.userid) {
           isDJ = true;
         }
       }
@@ -232,7 +232,7 @@ bot.on('add_dj', function (data) {
 
 bot.on('rem_dj', function (data) { 
   if (shutUp == false) {
-    if (data.user[0].userid == USERID) { 
+    if (data.user[0].userid == config.botinfo.userid) { 
       //do nothing. or write in something to have him say he has stepped down.
     } else {
       bot.speak('Everyone give it up for '+data.user[0].name+'!'); //thanks the dj when they step off stage. note that if this is active the removed dj announcement will never happen.
@@ -309,21 +309,21 @@ bot.on('speak', function (data) {
             bot.speak(hatersList[rndm]);
        }
        // Respond to "meow" command
-       if ((data.text.match(/meow/i))  && (data.userid != USERID)) {
+       if ((data.text.match(/meow/i))  && (data.userid != config.botinfo.userid)) {
           var rndm = Math.floor(Math.random() * 10);
             bot.speak(meowList[rndm]);
        }
        //below is the classic scene from South Park... had to be done.
        // Respond to "friend" command
-       if ((data.text.match(/friend/i))  && (data.userid != USERID)){
+       if ((data.text.match(/friend/i))  && (data.userid != config.botinfo.userid)){
           bot.speak("I'm not your friend, guy.");
        }
        // Respond to "buddy" command
-       if ((data.text.match(/buddy/i))  && (data.userid != USERID)){
+       if ((data.text.match(/buddy/i))  && (data.userid != config.botinfo.userid)){
           bot.speak("I'm not your buddy, friend.");
        }
        // Respond to "guy" command
-       if ((data.text.match(/guy/i))  && (data.userid != USERID)){
+       if ((data.text.match(/guy/i))  && (data.userid != config.botinfo.userid)){
           bot.speak("I'm not your guy, buddy.");
        }
        // Respond to "/rich" command
