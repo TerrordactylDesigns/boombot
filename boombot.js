@@ -62,6 +62,7 @@ var hatersList = [
 , "http://icanhasinternets.com/wp-content/uploads/2010/05/haters.gif"
 , "http://icanhasinternets.com/wp-content/uploads/2010/05/haters5.jpg"
 ];
+//meow array
 var meowList = [
     "Do I look like a cat to you, boy? Am I jumpin' around all nimbly bimbly from tree to tree?", 
     "Meow. What is so damn funny?",
@@ -74,6 +75,29 @@ var meowList = [
     "http://www.protias.com/Pictures/Super%20Troopers/meow.jpg",
     "http://sphotos.ak.fbcdn.net/hphotos-ak-snc3/hs195.snc3/20275_304481852744_293714027744_3524059_4812190_n.jpg"
 ];
+//magic 8ball array
+var eightBallList = [
+  "It is certain",
+  "It is decidedly so",
+  "Without a doubt",
+  "Yes – definitely",
+  "You may rely on it",
+  "As I see it, yes",
+  "Most likely",
+  "Outlook good",
+  "Yes",
+  "Signs point to yes",
+  "Reply hazy, try again",
+  "Ask again later",
+  "Better not tell you now",
+  "Cannot predict now",
+  "Concentrate and ask again",
+  "Don't count on it",
+  "My reply is no",
+  "My sources say no",
+  "Outlook not so good",
+  "Very doubtful"
+]
 
 //parse config and launch bot
 LoadConfigAndStart();                 
@@ -278,7 +302,7 @@ bot.on('speak', function (data) {
        }
        // Respond to "/help" command
        if (data.text.match(/^\/help$/)) {
-          bot.speak('My current command list is /hello, /help, /rules, /lyrics, /video, /boo, /cheer, /haters, meow, /rich, /chuck, /winning, /boombot. Plus a few hidden ones ;) remember to check for new updates!');
+          bot.speak('My current command list is /hello, /help, /rules, /lyrics, /video, /boo, /cheer, /haters, meow, /rich, /chuck, /winning, 8ball <question>, /google <search terms>, /boombot. Plus a few hidden ones ;) remember to check for new updates!');
        }
        // Respond to "/rules" command
        if (data.text.match(/^\/rules$/)) {
@@ -298,6 +322,11 @@ bot.on('speak', function (data) {
        if (data.text.match(/like a boss/i)) {
           var rndm = Math.floor(Math.random() * 10);
             bot.speak(bossList[rndm]);
+       }
+       //respond to "8ball" command 
+       if ((data.text.match(/8ball/i)) && (data.userid != config.botinfo.userid)) {
+          var rndm = Math.floor(Math.random() * 20);
+            bot.speak(":8ball: Says: " + eightBallList[rndm]);
        }
        //Sho NUFF!
        if ((data.text.match(/am i the meanest/i)) || (data.text.match(/am i the baddest/i)) || (data.text.match(/am i the prettiest/i)) || (data.text.match(/who am i/i)) || (data.text.match(/i cant hear you/i))) { //Im a big fan of that movie.... This will only respond 2-3 times in a row before you have to say something else in chat for it to continue. Unsure why yet. Will continue to work on it.
