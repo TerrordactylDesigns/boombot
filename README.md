@@ -1,4 +1,4 @@
-#BOOM BOT v1.3.2
+#BOOM BOT v1.3.3
 
 A bot for turntable.fm
 Dj, welcome users,
@@ -62,6 +62,7 @@ Everyone:
 * /rich - one of the best bender quotes ever
 * /chuck - random Chuck Norris joke from the icndb API
 * /winning - random Charlie Sheen quote from the API
+* 8ball <question> - magic 8 ball answers all
 * buddy, guy, friend - say any of these in chat and be met with the appropriate line from the South Park episode.
 
 ##Administrator/"The Master":
