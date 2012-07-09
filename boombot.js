@@ -487,6 +487,50 @@ bot.on('speak', function (data) {
         bot.speak("google what? Don't make me pick, you won't like what you see.....");
       }
     }
+
+    //  Blernsball!
+    //  by default this is commented out for people who hate baseball
+    
+    // Respond to "/blernsball" command
+    // var mlb = require('mlb');
+    // if (data.text.match(/^\/blernsball$/)) {
+    //   //  call the API
+    //   mlb.games.get(function(err, res) {
+    //     //  initiate the looping variables
+    //     var stop = 0;
+    //     var blernsball = new Array();
+    //     //  grab a few events. 
+    //     //  change the if statement or the limit numbers below to experiment with how much info you want to return
+    //     for (var urlName in res) {
+    //       stop++;
+    //       if (stop < 3) {
+    //         //  build the call and pull the event
+    //         var game = mlb.games.url(urlName);
+    //         mlb.events(game, function (err, res2, body) {
+    //           res2.forEach(function (val) {
+    //             //  for each event push the results into the array in order
+    //             blernsball.push(res[urlName].home + " Vs " + res[urlName].away);
+    //             blernsball.push('Event: ' + val['@'].event);
+    //             blernsball.push('Description: ' + val['@'].des);
+    //             blernsball.push('Time: ' + val['@'].start_tfs_zulu + '\n');
+    //           })
+    //         }, {limit: 1});
+    //       }
+    //     }
+    //     //  every half a second say back the array contents
+    //     setTimeout(function() {
+    //         var pos = 0;
+    //         for (i = 0; i < blernsball.length; i++) {
+    //           setTimeout(function() {
+    //             bot.speak(blernsball[pos]);
+    //             pos += 1;
+    //           }, (i + 1) * 500);  
+    //         }
+    //       }, 1 * 500);
+
+    //   });
+    // }
+
   }
 
   
