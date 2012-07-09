@@ -10,6 +10,7 @@ Call out haters, etc
 	NPM
 	ttapi - https://github.com/alaingilbert/Turntable-API
 	ntwitter (if you want auto tweets) - https://github.com/AvianFlu/ntwitter
+	mlb (if you want the latest baseball scores)
 
 ##Setup
 
@@ -41,6 +42,14 @@ Once you have your token keys, add them to the appropriately commented areas at 
 
 The bot will now tweet the current track and artist with a #Turntablefm hashtag.
 
+##Blernsball action
+
+This feature is commented out by default for people who could care less about baseball. 
+To add, use NPM to install mlb, uncomment out the blernsball section, add to the help commands list.
+This command will pull back the latest baseball games and some events happening in them.
+Modify the limit and the loop to retrieve more or less information.
+
+
 
 ##Commands
 
@@ -64,6 +73,7 @@ Everyone:
 * /winning - random Charlie Sheen quote from the API
 * 8ball <question> - magic 8 ball answers all
 * buddy, guy, friend - say any of these in chat and be met with the appropriate line from the South Park episode.
+* /blernsball - IF SET UP - returns the latest baseball events as they happen
 
 ##Administrator/"The Master":
 
