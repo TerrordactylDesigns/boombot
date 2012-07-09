@@ -45,7 +45,7 @@
         <img border="0" width="90" src="https://github.com/images/modules/download/tar.png"></a>
     </div>
 
-    <h1><a href="https://github.com/TerrordactylDesigns/boombot">boombot</a>
+    <h1><a href="https://github.com/TerrordactylDesigns/boombot">boombot v1.3.4</a>
       <span class="small">by <a href="https://github.com/TerrordactylDesigns">TerrordactylDesigns</a></span></h1>
 
       <img src="http://dl.dropbox.com/u/51430720/BoomBot.png" title="boombot turntable.fm bot">
@@ -69,6 +69,8 @@ You want BOOMBOT.........</p>
         ttapi - https://github.com/alaingilbert/Turntable-API<br />
 
         ntwitter - https://github.com/AvianFlu/ntwitter (If you want twitter integration) <br />
+
+        mlb - https://github.com/st-luke/mlb.js (If you want baseball events) <br />
 </p>
     
 
@@ -102,7 +104,13 @@ Create a new twitter application. VERY IMPORTANT: BEFORE you request your Oauth 
 Once you have your token keys, add them to the appropriately commented areas at the bottom of the file.<br/>
 
 The bot will now tweet the current track and artist with a #Turntablefm hashtag.     </p>
-    
+
+
+  <h2>Blernsball action</h2>
+  <p>This feature is commented out by default for people who could care less about baseball. <br />
+To add, use NPM to install mlb, uncomment out the blernsball section, add to the help commands list.<br />
+This command will pull back the latest baseball games and some events happening in them.<br />
+Modify the limit and the loop to retrieve more or less information.</p>
 
 
       <h2>Commands</h2>
@@ -113,6 +121,7 @@ The bot will now tweet the current track and artist with a #Turntablefm hashtag.
           <li>/video - returns a link to a youtube video search for the current song</li>
           <li>/google &lt;search terms&gt; - returns a link to a "let me google that for you" search of your query</li>
           <li>/hello - says hello back</li>
+          <li>8ball &lt;Yes/No question&gt; - magic 8 ball answers all</li>
           <li>/dance - gives you a dance partner</li>
           <li>/boombot - information about the bot and how to acquire one</li>
           <li>/help - list the commands</li>
@@ -126,6 +135,7 @@ The bot will now tweet the current track and artist with a #Turntablefm hashtag.
           <li>/chuck - random Chuck Norris joke from the icndb API</li>
           <li>/winning - random Charlie Sheen quote from the API</li>
           <li>buddy, guy, friend - say any of these in chat and be met with the appropriate line from the South Park episode.</li>
+          <li>/blernsball - IF SET UP - returns the latest baseball events as they happen</li>
         </ul><!-- / -->
         <h4>Administrator/"The Master"</h4>
         <p>These commands are given as: &lt;botname&gt; &lt;command&gt; </p>
