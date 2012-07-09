@@ -1,4 +1,4 @@
-#BOOM BOT v1.3.3
+#BOOM BOT v1.3.4
 
 A bot for turntable.fm
 Dj, welcome users,
