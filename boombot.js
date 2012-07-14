@@ -229,7 +229,7 @@ bot.on('add_dj', function (data) {
   if (shutUp == false) {
     if (data.user[0].userid == config.botinfo.userid) { //the bot will announce he is DJing
       bot.speak('Aural destruction mode activated.');
-    } else if (data.user[0].userid == MASTERID) { //the bot will announce you specially
+    } else if (data.user[0].userid == config.admin.userid) { //the bot will announce you specially
       bot.speak('The Master has taken the stage! Bow before '+data.user[0].name+'!'); 
     } else {
       bot.speak(data.user[0].name+' has taken the stage to amuse my master.'); //announce the new dj
