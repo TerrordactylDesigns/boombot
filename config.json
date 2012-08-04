@@ -1,24 +1,24 @@
 {
   "botinfo" :
   {
-    "auth" : "auth+live+xxxxxxxxxxxxxxxxxxxxx",
-    "userid" : "xxxxxxxxxxxxxxxxxxxxxx",
-    "botname" : "boombot"
+    "auth" : "auth+live+675f64f738640a149889304a3f9634e35267006a",
+    "userid" : "4ffff906aaa5cd013c000106",
+    "botname" : "Hershey's Bitch"
   },
-  "roomid" : "xxxxxxxxxxxxxxxxxxxxxxxxxx",
-  "admin" : 
+  "roomid" : "4f6d3091a3f75169fa0007a2",
+  "admin" : "4fb30359aaa5cd1b440008fb"
   {
-    "userid" : "xxxxxxxxxxxxxxxxxxxxxxxx"
+    "userid" : "4fb30359aaa5cd1b440008fb"
   },
   "consolelog" : true,
-  "responses" :
+  "responses" : "yea what is it?"
   {
-    "rules" : "There is only one rule. I RULE! OK 2 rules: the lame button does exist, but don't ever touch it.You've been warned...",
-    "botwelcome" : "WHO DARES SUMMON BOOMBOT?!",
+    "rules" : "1) Repect others. 2) No spam. 3) 15 min afk limit while djing 4) No Skrillex without moderator permission. 5) No laming while djing.",
+    "botwelcome" : "s",
     "adminwelcome" : "My master has arrived!",
-    "modwelcome" : "Welcome back.",
-    "welcome" : "Welcome to the room! Type /help to learn how to control me!",
-    "welcomepm" : "Welcome to the room. Please read the rules. Or, don't and get thrown out."
+    "modwelcome" : "s",
+    "welcome" : "s",
+    "welcomepm" : "s"
   },
   "version" : "1.3.4"
 }
