@@ -18,8 +18,13 @@ global.DJMode = false;                              //DJMode marker for determin
 global.shutUp = false;                              //variable to make the bot not speak
 global.snagCounter = 0;                             //variable to hold song snag count for stats
 var args = process.argv; 
-var theUsersList = {};                //user list object to hold DJ information
-var botNameRegEx;                 //variable to hold the bots name as RegExp for admin commands
+var theUsersList = {};                              //user list object to hold DJ information
+var botNameRegEx;                                   //variable to hold the bots name as RegExp for admin commands
+var djQueue = [];                                   //queue array
+var queue = false;                                  //queue switch
+var yank = false;                                   //variable for pulling dj from stage after play counts
+var queueLength = 3;                                //queue song length initializer
+var timedOut = true;                                //variable for whether a users time period has expired in the queue
 
 
 //modify the base array object to check if arrays contain a value
@@ -31,6 +36,33 @@ Array.prototype.contains = function(obj) {
         }
     }
     return false;
+}
+//timer for queue control
+function timeUp() {
+  if (timedOut) {
+    djQueue.splice(0,1);
+    if (djQueue.length != 0) {
+      var nextUp = theUsersList[djQueue[0]].name;
+      bot.speak('@' + nextUp + ' you have 30 seconds starting now to step up..');
+      if (djQueue.length != 0) {
+        setTimeout(function(){
+          timeUp();
+        }, 30 * 1000);
+      }
+    }
+  } else {
+    timedOut = true;
+  }
+}
+//remove the user from the queue
+function RemoveFromQueue(userID, userName) {
+  var DJIndex = djQueue.indexOf(userID);
+  if (DJIndex != -1) {
+    djQueue.splice(DJIndex, 1);
+    bot.speak('fine ' + userName + " don't join our party....");
+  } else {
+    bot.speak("You're not in the queue.... type q+ to add yourself.");
+  }
 }
 
 //arrays for commands
@@ -179,6 +211,9 @@ bot.on('deregistered', function (data) {
   //remove the person from the user list
   var user = data.user[0];
   delete theUsersList[user.userid];
+  if (djQueue.contains(data.user[0].userid)) {
+    RemoveFromQueue(data.user[0].userid, data.user[0].name);
+  }
 });
 
 bot.on('update_votes', function (data) { 
@@ -203,9 +238,29 @@ bot.on('update_votes', function (data) {
 
 bot.on('newsong', function (data){ 
   //on song start we will reset the snagCounter
-    snagCounter = 0;
-    //auto bop. this is no longer allowed by turntable. it is here for informational purposes only. The writer of this software does not condone its use.
-    //bot.bop();
+  snagCounter = 0;
+  //auto bop. this is no longer allowed by turntable. it is here for informational purposes only. The writer of this software does not condone its use.
+  //bot.bop();
+
+  /*
+    if the queue is on and the array has more than 0: 
+    remove any dj that is not the first in array,
+    after 30 seconds remove them from the array - announce next if there
+  */
+  if (queue) {
+    //  get the array of current DJs
+    var currDjs = data.room.metadata.djs;
+    //  find the next DJ allowed up
+    if ((djQueue.length != 0) && (currDjs.length < 5)) {
+      var nextUp = theUsersList[djQueue[0]].name;
+      bot.speak('@' + nextUp + ' you have 30 seconds starting now to step up');
+      setTimeout(function(){
+            timeUp();
+      }, 30 * 1000);
+    }
+    theUsersList[data.room.metadata.current_dj].plays += 1;
+    console.log(theUsersList[data.room.metadata.current_dj].plays);
+  }
 });
 
 bot.on('snagged', function (data) { 
@@ -217,6 +272,13 @@ bot.on('endsong', function (data) {
   //on song end we will announce the votes for the last song
   if (shutUp == false) {
     bot.speak(data.room.metadata.current_song.metadata.song + " by " + data.room.metadata.current_song.metadata.artist + " got :+1: " + data.room.metadata.upvotes + " :-1: " +  data.room.metadata.downvotes + " <3 " + snagCounter);
+  }
+  if (queue) {
+    var djToRem = data.room.metadata.current_dj;
+    console.log(theUsersList[djToRem].plays);
+    if (theUsersList[djToRem].plays >= queueLength) {
+      bot.remDj(djToRem);
+    }
   }
 });
 
@@ -252,6 +314,19 @@ bot.on('add_dj', function (data) {
         bot.remDj();
       }
   });
+  if (queue) {
+    //  check the users ID and compare to position 0 of q array
+    if (data.user[0].userid != djQueue[0] && djQueue.length > 0) {
+      //  yank the user if they are not position 0 
+      bot.remDj(data.user[0].userid);
+      bot.speak('Not your turn @' + data.user[0].name + " type q to see the order, or q+ to add yourself.");
+    } else {
+      djQueue.splice(0,1);
+      timedOut = false;
+      theUsersList[data.user[0].userid].plays = 0;
+      console.log(theUsersList[data.user[0].userid].plays);
+    }
+  }
 });
 
 bot.on('rem_dj', function (data) { 
@@ -271,6 +346,15 @@ bot.on('rem_dj', function (data) {
         bot.addDj();
       }
   });
+  if (queue) {
+    if (djQueue.length > 0) {
+      var nextUp = theUsersList[djQueue[0]].name;
+      bot.speak('@' + nextUp + ' you have 30 seconds starting now to step up..');
+      setTimeout(function(){
+            timeUp();
+      }, 30 * 1000);
+    }
+  }
 });
 
 bot.on('pmmed', function (data){ 
@@ -657,6 +741,120 @@ bot.on('speak', function (data) {
             process.exit(0);
           }, 3 * 1000);
       }
+    }
+
+    if (config.queue) {
+      /*
+        QUEUE COMMANDS
+      */
+      if (data.text === "q+" || data.text.match(/addme/i) || data.text === "Q+") {
+        if (queue) {
+          var userID = data.userid;
+          //  figure out if user is a current DJ
+          var currDjs = [];
+          bot.roomInfo(true, function (data2) {
+            currDjs = data2.room.metadata.djs;
+            //console.log(currDjs);
+            if (currDjs.contains(userID)) {
+              bot.speak("Didn't notice you're on stage already?");
+            } else if (djQueue.contains(userID)) {
+              bot.speak("You're already in the queue. Stop being greedy.....");
+            } else {
+              djQueue.push(userID);
+              var DJIndex = djQueue.indexOf(userID) + 1;
+              bot.speak(data.name + ' has been added in position ' + DJIndex);
+            }
+          });
+        } else {
+          bot.speak('free for all, hop up!');
+        }
+      }
+
+      if (data.text === "q-") {
+        RemoveFromQueue(data.userid, data.name);
+      }
+
+      if (data.text === 'q') {
+        if (queue) {
+          var x = djQueue.length;
+          var pos;
+          var userName;
+          if (x === 0) {
+            bot.speak('No ones waiting.');
+          } else {
+            var queueOrder = "";
+            for (i = 0; i < x; i++) {
+              pos = i + 1;
+              queueOrder += pos + ': @' + theUsersList[djQueue[i]].name + ' ';
+            }
+            bot.speak(queueOrder);
+          }
+        } else {
+          bot.speak('free for all.... hop up!');
+        }
+      }
+
+      if (data.text === "/q") {
+        if (queue) {
+          bot.speak("Queue is on. Song limit is:"+queueLength+". q+ to join. q- to leave. q to see the current wait. /plays for dj played counts");
+        } else {
+          bot.speak("Queue is currently off");
+        }
+      }
+
+
+      if (data.text === "/settings") {
+        var onOff = (queue) ? "On" : "Off";
+        bot.speak("Queue is " + onOff + ". Limit: " + queueLength + " songs.");
+      }
+
+      if (data.text === "/plays") {
+        bot.roomInfo(true, function (inf) {
+          var currDjArray = inf.room.metadata.djs;
+          var counter = currDjArray.length;
+          var responseString = "";
+          for (i = 0; i < counter; i++) {
+            responseString += theUsersList[currDjArray[i]].name + " (" + theUsersList[currDjArray[i]].plays + "), ";
+          }
+          bot.speak(responseString);
+        });
+      }
+
+
+      /*
+        QUEUE CONTROL (ROOM ADMINS ONLY)
+      */
+    
+      bot.roomInfo(true, function(data2) {
+        var modArray = data2.room.metadata.moderator_id;
+        if (modArray.contains(data.userid)) { //user is a room mod
+          if (data.text === 'q on') {
+            queue = true;
+            bot.speak('Alright ladies and gents. Get in line, watch your step, no shirts or pants allowed.');
+          }
+          if (data.text === 'q off') {
+            queue = false;
+            djQueue = [];
+            bot.speak('FREE FOR ALL! THIS IS MADNESS! THIS IS SPARTA!');
+          }
+          if (data.text === "/1") {
+            queueLength = 1;
+            bot.speak("One song then GTFO the decks....");
+          }
+          if (data.text === "/2") {
+            queueLength = 2;
+            bot.speak("Two songs then GTFO the decks....");
+          }
+          if (data.text === "/3") {
+            queueLength = 3;
+            bot.speak("Three songs then GTFO the decks....");
+          }
+          if (data.text === "/none") {
+            queueLength = 100;
+            bot.speak("No limit to songs....");
+          }
+        }
+      });
     }
 
 
