@@ -45,7 +45,7 @@
         <img border="0" width="90" src="https://github.com/images/modules/download/tar.png"></a>
     </div>
 
-    <h1><a href="https://github.com/TerrordactylDesigns/boombot">boombot v1.3.4</a>
+    <h1><a href="https://github.com/TerrordactylDesigns/boombot">boombot v1.4.0</a>
       <span class="small">by <a href="https://github.com/TerrordactylDesigns">TerrordactylDesigns</a></span></h1>
 
       <img src="http://dl.dropbox.com/u/51430720/BoomBot.png" title="boombot turntable.fm bot">
@@ -93,6 +93,11 @@ Add to the arrays in the boombot.js file anything you want to add or change. Wou
 
 path to the saved location,<br />
 node boombot.js</p>
+
+<h2>DJ Queue</h2>
+<p>Due to demand I have added a queue system. It was written offhand on the fly, so there may be some issues. If you find any please let me know. This is V1 of the queue so there will be some fixes (such as a true no limit instead of 100) and feature adds to follow. <br/>
+To set up, just keep the config file setting to true. If you could care less about a queue system just set that to false.
+</p>
 
     <h2>Automated tweeting</h2>
     <p>This feature is commented out by default for people who could care less about twitter. <br/> 
@@ -156,6 +161,24 @@ Modify the limit and the loop to retrieve more or less information.</p>
           <li>chrome up - sets the bots laptop to ChromeOS</li>
           <li>droid up - sets the bots laptop to Android phone</li>
         </ul><!-- / -->
+        <h4>Queue commands</h4>
+        <ul>
+          <li>/q - gives information on the current queue settings</li>
+          <li>q - list the current queue</li>
+          <li>q+ - add yourself to the queue</li>
+          <li>q- - remove yourself from the queue</li>
+          <li>/plays - list the play counts of each DJ on stage</li>
+          <li>/settings - see the queues current settings</li>
+        </ul>
+        <h4>Queue control (Room mods ONLY)</h4>
+        <ul>
+          <li>q on - turn the queue on</li>
+          <li>q off - turn the queue off</li>
+          <li>/1 - set the song limit to 1</li>
+          <li>/2 - set the song limit to 2</li>
+          <li>/3 - set the song limit to 3</li>
+          <li>/none - set the song limit to 100</li>
+        </ul>
       </p>
     
       <h2>License</h2>
