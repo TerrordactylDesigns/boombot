@@ -1,6 +1,7 @@
-#BOOM BOT v1.3.4
+#BOOM BOT v1.4.0
 
 A bot for turntable.fm
+Control a Queue,
 Dj, welcome users,
 Call out haters, etc
 
@@ -109,6 +110,34 @@ Everyone:
 * chrome up - sets the bots laptop to ChromeOS
 
 * droid up - sets the bots laptop to Android phone
+
+##Queue commands
+
+/q - gives information on the current queue settings
+
+* q - list the current queue
+
+* q+ - add yourself to the queue
+
+* q- - remove yourself from the queue
+
+* /plays - list the play counts of each DJ on stage
+
+##Queue control (Room Mods Only)
+
+* q on - turn the queue on
+
+* q off - turn the queue off
+
+* /settings - see the queues current settings
+
+* /1 - set the song limit to 1
+
+* /2 - set the song limit to 2
+
+* /3 - set the song limit to 3
+
+* /none - set the song limit to 100
 
 ##Automatic DJ mode
 
