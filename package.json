@@ -14,7 +14,7 @@
 		"url": "https://github.com/TerrordactylDesigns/boombot.git"	
 	},
 	"dependencies": {
-		"> ttapi"	:	"1.2.x"
+		"ttapi"	:	"> 1.2.x"
 	},
 	"license": "MIT",
 	"engine": {
