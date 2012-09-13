@@ -12,12 +12,12 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 global.fs = require('fs');                          //allows file reading for scripts/config/etc
 global.Bot;                                         //for storing the ttapi
 global.bot;                                         //for accessing the ttapi
-global.config;                                      //for storing the configuration settings            
+global.config;                                      //for storing the configuration settings
 global.http = require('http');                      //importing http for API calls
 global.DJMode = false;                              //DJMode marker for determining if bot should step down during auto DJ saving
 global.shutUp = false;                              //variable to make the bot not speak
 global.snagCounter = 0;                             //variable to hold song snag count for stats
-var args = process.argv; 
+var args = process.argv;
 var theUsersList = {};                              //user list object to hold DJ information
 var botNameRegEx;                                   //variable to hold the bots name as RegExp for admin commands
 var djQueue = [];                                   //queue array
@@ -96,7 +96,7 @@ var hatersList = [
 ];
 //meow array
 var meowList = [
-    "Do I look like a cat to you, boy? Am I jumpin' around all nimbly bimbly from tree to tree?", 
+    "Do I look like a cat to you, boy? Am I jumpin' around all nimbly bimbly from tree to tree?",
     "Meow. What is so damn funny?",
     "http://nbacats.files.wordpress.com/2012/02/alright-meow-super-troopers-demotiv.jpg",
     "All right meow. Hand over your license and registration.",
@@ -132,7 +132,7 @@ var eightBallList = [
 ]
 
 //parse config and launch bot
-LoadConfigAndStart();                 
+LoadConfigAndStart();
 
 function LoadConfigAndStart() {
   //import the ttapi
@@ -165,7 +165,7 @@ function LoadConfigAndStart() {
 bot.on('roomChanged', function(data) {
   //log to the console
   if (config.consolelog) {
-    console.log('[ ENTRANCE EVENT ] : ' + data);
+    console.log('[ ENTRANCE EVENT ] : ' + data.room.name);
   }
   // Reset the users list object
   theUsersList = { };
@@ -174,31 +174,36 @@ bot.on('roomChanged', function(data) {
   for (var i=0; i<users.length; i++) {
     var user = users[i];
     theUsersList[user.userid] = user;
-    console.log('added ' + user + ' to theUsersList');
+    if (config.consolelog) {
+      console.log('[ EVENT ] : added ' + user.name + ' to theUsersList');
+    }
   }
 });
 
-bot.on('registered',  function (data) { 
+bot.on('registered',  function (data) {
   //log event to console
   if (config.consolelog) {
-    console.log("[ REGISTER EVENT ] : " + data);
+    console.log("[ REGISTER EVENT ] : " + data.user[0].name);
   }
   //add user to the users list object
   var user = data.user[0];
   theUsersList[user.userid] = user;
+  if (config.consolelog) {
+    console.log('[ EVENT ] : added ' + user.name + ' to theUsersList');
+  }
   //chat announcer
   if (shutUp == false) {
     if (data.user[0].userid == config.botinfo.userid) { //boombot announces himself
       bot.speak(config.responses.botwelcome)
     } else if (data.user[0].userid == config.admin.userid) { //if the master arrives announce him specifically
-      bot.speak(config.responses.adminwelcome); 
+      bot.speak(config.responses.adminwelcome);
     } else {
       //check to see if the user is a mod, if not PM them
       bot.roomInfo(true, function(data2) {
         var modArray = data2.room.metadata.moderator_id;
         if (modArray.contains(data.user[0].userid)) { //user is a room mod
           bot.speak(config.responses.modwelcome);
-        } else {   
+        } else {
           bot.pm(config.responses.welcomepm, data.user[0].userid, function(data) { }); //PM the user
           bot.speak(config.responses.welcome); //welcome the rest
         }
@@ -216,7 +221,7 @@ bot.on('deregistered', function (data) {
   }
 });
 
-bot.on('update_votes', function (data) { 
+bot.on('update_votes', function (data) {
   //log to the console
   if (config.consolelog) {
     console.log("[ VOTE EVENT ] : " + data);
@@ -228,22 +233,22 @@ bot.on('update_votes', function (data) {
         var uncut = data.room.metadata.votelog[0].toString();
         var chopped = uncut.substring(0, uncut.indexOf(','));
         var jerk = theUsersList[chopped].name
-        bot.speak(jerk + ' thinks your song sucks..');    
+        bot.speak(jerk + ' thinks your song sucks..');
       } catch (err) {
         //initial downvotes go by without a user ID to trap. Also if you have never upvoted your downvotes go by with no ID.
         bot.speak("Ouch. Someone thinks you're lame.....")
       }
-    } 
+    }
 });
 
-bot.on('newsong', function (data){ 
+bot.on('newsong', function (data){
   //on song start we will reset the snagCounter
   snagCounter = 0;
   //auto bop. this is no longer allowed by turntable. it is here for informational purposes only. The writer of this software does not condone its use.
   //bot.bop();
 
   /*
-    if the queue is on and the array has more than 0: 
+    if the queue is on and the array has more than 0:
     remove any dj that is not the first in array,
     after 30 seconds remove them from the array - announce next if there
   */
@@ -259,46 +264,44 @@ bot.on('newsong', function (data){
       }, 30 * 1000);
     }
     theUsersList[data.room.metadata.current_dj].plays += 1;
-    console.log(theUsersList[data.room.metadata.current_dj].plays);
   }
 });
 
-bot.on('snagged', function (data) { 
+bot.on('snagged', function (data) {
   //increment the snag counter when a song is snagged
     snagCounter++;
 });
 
-bot.on('endsong', function (data) { 
+bot.on('endsong', function (data) {
   //on song end we will announce the votes for the last song
   if (shutUp == false) {
     bot.speak(data.room.metadata.current_song.metadata.song + " by " + data.room.metadata.current_song.metadata.artist + " got :+1: " + data.room.metadata.upvotes + " :-1: " +  data.room.metadata.downvotes + " <3 " + snagCounter);
   }
   if (queue) {
     var djToRem = data.room.metadata.current_dj;
-    console.log(theUsersList[djToRem].plays);
     if (theUsersList[djToRem].plays >= queueLength) {
       bot.remDj(djToRem);
     }
   }
 });
 
-bot.on('booted_user', function (data){ 
+bot.on('booted_user', function (data){
   //escorted off the stage sh** talk. //note that if you also use the rem_dj function this function will never trigger, the rem_dj will trigger instead
-  bot.speak('YEAH, GET THAT DJ OUTTTTTTTTTAAAA HEEERRRREEEEEEE!'); 
+  bot.speak('YEAH, GET THAT DJ OUTTTTTTTTTAAAA HEEERRRREEEEEEE!');
 });
 
-bot.on('add_dj', function (data) { 
+bot.on('add_dj', function (data) {
   if (shutUp == false) {
     if (data.user[0].userid == config.botinfo.userid) { //the bot will announce he is DJing
       bot.speak('Aural destruction mode activated.');
     } else if (data.user[0].userid == config.admin.userid) { //the bot will announce you specially
-      bot.speak('The Master has taken the stage! Bow before '+data.user[0].name+'!'); 
+      bot.speak('The Master has taken the stage! Bow before '+data.user[0].name+'!');
     } else {
       bot.speak(data.user[0].name+' has taken the stage to amuse my master.'); //announce the new dj
     }
   }
   //if more than 1 real DJ are on decks the bot hops down unless DJMode is true
-  bot.roomInfo(true, function(data) { 
+  bot.roomInfo(true, function(data) {
       var currDJs = data.room.metadata.djs;
       var countDJs = currDJs.length;
       var isDJ = false;
@@ -317,28 +320,27 @@ bot.on('add_dj', function (data) {
   if (queue) {
     //  check the users ID and compare to position 0 of q array
     if (data.user[0].userid != djQueue[0] && djQueue.length > 0) {
-      //  yank the user if they are not position 0 
+      //  yank the user if they are not position 0
       bot.remDj(data.user[0].userid);
       bot.speak('Not your turn @' + data.user[0].name + " type q to see the order, or q+ to add yourself.");
     } else {
       djQueue.splice(0,1);
       timedOut = false;
       theUsersList[data.user[0].userid].plays = 0;
-      console.log(theUsersList[data.user[0].userid].plays);
     }
   }
 });
 
-bot.on('rem_dj', function (data) { 
+bot.on('rem_dj', function (data) {
   if (shutUp == false) {
-    if (data.user[0].userid == config.botinfo.userid) { 
+    if (data.user[0].userid == config.botinfo.userid) {
       //do nothing. or write in something to have him say he has stepped down.
     } else {
       bot.speak('Everyone give it up for '+data.user[0].name+'!'); //thanks the dj when they step off stage. note that if this is active the removed dj announcement will never happen.
     }
   }
   //if the DJs drop to just 1 we will save youuuuuu
-  bot.roomInfo(true, function(data) { 
+  bot.roomInfo(true, function(data) {
       var currDJs = data.room.metadata.djs;
       var countDJs = currDJs.length;
       if (countDJs <= 1) {
@@ -357,9 +359,9 @@ bot.on('rem_dj', function (data) {
   }
 });
 
-bot.on('pmmed', function (data){ 
+bot.on('pmmed', function (data){
   //Allow boombot to become a psychic medium who can channel your spirit..... AKA.. IM him and he speaks it to the room
-  if (data.senderid == config.admin.userid) { 
+  if (data.senderid == config.admin.userid) {
     try {
       bot.speak(data.text);
     } catch (err) {
@@ -407,7 +409,7 @@ bot.on('speak', function (data) {
           var rndm = Math.floor(Math.random() * 10);
             bot.speak(bossList[rndm]);
        }
-       //respond to "8ball" command 
+       //respond to "8ball" command
        if ((data.text.match(/8ball/i)) && (data.userid != config.botinfo.userid)) {
           var rndm = Math.floor(Math.random() * 20);
             bot.speak(":8ball: Says: " + eightBallList[rndm]);
@@ -445,7 +447,7 @@ bot.on('speak', function (data) {
        }
        // Respond to "/lyrics" command
        if (data.text.match(/^\/lyrics$/)) {
-         bot.roomInfo(true, function(data) { 
+         bot.roomInfo(true, function(data) {
            //get the current song name and artist, then replace blank spaces with underscores
            var currSong = data.room.metadata.current_song.metadata.song;
            var currArtist = data.room.metadata.current_song.metadata.artist;
@@ -461,14 +463,14 @@ bot.on('speak', function (data) {
            };
            //call the api
            http.get(options, function(res) {
-             res.on('data', function(chunk) {  
+             res.on('data', function(chunk) {
                   try {
                     //lyrics wiki isnt true JSON so JSON.parse chokes
                     var obj = eval("(" + chunk + ')');
                     //give back the lyrics. the api only gives you the first few words due to licensing
                     bot.speak(obj.lyrics);
                     //return the url to the full lyrics
-                    bot.speak(obj.url);   
+                    bot.speak(obj.url);
                     console.log(obj);
                   } catch (err) {
                     bot.speak(err);
@@ -481,7 +483,7 @@ bot.on('speak', function (data) {
        }
       // Respond to "/video" command
       if (data.text.match(/^\/video$/)) {
-        bot.roomInfo(true, function(data) { 
+        bot.roomInfo(true, function(data) {
           var queryResponse = '';
           var currSong = data.room.metadata.current_song.metadata.song;
           var currArtist = data.room.metadata.current_song.metadata.artist;
@@ -497,7 +499,7 @@ bot.on('speak', function (data) {
           console.log(options);
           http.get(options, function(response) {
             console.log("Got response:" + response.statusCode);
-            response.on('data', function(chunk) {  
+            response.on('data', function(chunk) {
                 try {
                   queryResponse += chunk;
                 } catch (err) {
@@ -528,7 +530,7 @@ bot.on('speak', function (data) {
           };
         //make the API call and parse the JSON result
         http.get(options, function(res) {
-          res.on('data', function(chunk) {  
+          res.on('data', function(chunk) {
                     var chuck = JSON.parse(chunk);
                     bot.speak(chuck.value.joke);
                });
@@ -546,7 +548,7 @@ bot.on('speak', function (data) {
         };
 
         http.get(options, function(res) {
-          res.on('data', function(chunk) {  
+          res.on('data', function(chunk) {
                     bot.speak(chunk);
                });
 
@@ -574,7 +576,7 @@ bot.on('speak', function (data) {
 
     //  Blernsball!
     //  by default this is commented out for people who hate baseball
-    
+
     // Respond to "/blernsball" command
     // var mlb = require('mlb');
     // if (data.text.match(/^\/blernsball$/)) {
@@ -583,7 +585,7 @@ bot.on('speak', function (data) {
     //     //  initiate the looping variables
     //     var stop = 0;
     //     var blernsball = new Array();
-    //     //  grab a few events. 
+    //     //  grab a few events.
     //     //  change the if statement or the limit numbers below to experiment with how much info you want to return
     //     for (var urlName in res) {
     //       stop++;
@@ -608,7 +610,7 @@ bot.on('speak', function (data) {
     //           setTimeout(function() {
     //             bot.speak(blernsball[pos]);
     //             pos += 1;
-    //           }, (i + 1) * 500);  
+    //           }, (i + 1) * 500);
     //         }
     //       }, 1 * 500);
 
@@ -617,7 +619,7 @@ bot.on('speak', function (data) {
 
   }
 
-  
+
     //admin control
     if ((data.userid == config.admin.userid) && (data.text.match(botNameRegEx))) {
 
@@ -632,18 +634,18 @@ bot.on('speak', function (data) {
         bot.speak('Chatterbox mode activated.')
       }
       //makes the bot get on stage
-      if (data.text.match(/djmode/i)) {                   
+      if (data.text.match(/djmode/i)) {
         DJMode = true;
         bot.addDj();
       }
       //tells the bot to get off stage and get in the crowd
-      if (data.text.match(/getdown/i)) {                  
+      if (data.text.match(/getdown/i)) {
         DJMode = false;
         bot.speak('Aural destruction mode de-activated.')
         bot.remDj();
       }
       //tells the bot to skip the track it is playing
-      if (data.text.match(/skip/i)) {                     
+      if (data.text.match(/skip/i)) {
         bot.speak('As you wish master.');
         bot.skip();
       }
@@ -824,7 +826,7 @@ bot.on('speak', function (data) {
       /*
         QUEUE CONTROL (ROOM ADMINS ONLY)
       */
-    
+
       bot.roomInfo(true, function(data2) {
         var modArray = data2.room.metadata.moderator_id;
         if (modArray.contains(data.userid)) { //user is a room mod
@@ -863,8 +865,8 @@ bot.on('speak', function (data) {
 // Live tweeting //Code from - https://github.com/AvianFlu/ntwitter
 //by default this is commented out for people who dont care about Twitter integration. Uncomment the below section, replace the parts with your own keys and URLs, delete the instructional comments out.
 
-// var twitter = require('ntwitter'); 
-// bot.on('newsong', function (data){ 
+// var twitter = require('ntwitter');
+// bot.on('newsong', function (data){
 //   // Tweet the new song from the twitter apps account you created. Gives the song name, artist, and #turntablefm hashtag
 //   var twit = new twitter({
 //     consumer_key: 'put your consumer key here', //add your consumer key
