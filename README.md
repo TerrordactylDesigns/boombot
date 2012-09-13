@@ -1,4 +1,4 @@
-#BOOM BOT v1.4.0
+#BOOM BOT v1.4.1
 
 [![Build Status](https://secure.travis-ci.org/TerrordactylDesigns/boombot.png)](http://travis-ci.org/TerrordactylDesigns/boombot)
 
@@ -26,7 +26,7 @@ http://alaingilbert.github.com/Turntable-API/bookmarklet.html
 Now use the same method to get your personal accounts user id for control of the bot
 
 Open config.json in Sublime text 2 (Or your editor of choice... but really... go get sublime... its great..)
-replace the xxxxxxxxxxxxxxxxxxxxxxxx's in the botinfo section with your bots auth, bot id, and replace the xxxxxxxxxxxx's in the admin section your own personal user id. 
+replace the xxxxxxxxxxxxxxxxxxxxxxxx's in the botinfo section with your bots auth, bot id, and replace the xxxxxxxxxxxx's in the admin section your own personal user id.
 replace botname in the botinfo section with what you want to call the bot.
 
 Add to the arrays and/or commands in boombot.js anything you want to add or change. Would be nice of you to keep the url to obtain your own copy under the /boombot command, but I won't hunt you down if you want it to go.
@@ -40,14 +40,14 @@ This feature is commented out by default for people who could care less about tw
 
 Create a twitter acct if you don't already have one.
 Then go to dev.twitter.com and sign in with that acct and enable it for development.
-Create a new twitter application. VERY IMPORTANT: BEFORE you request your Oauth tokens set the app to read + write or read + write + direct message. 
+Create a new twitter application. VERY IMPORTANT: BEFORE you request your Oauth tokens set the app to read + write or read + write + direct message.
 Once you have your token keys, add them to the appropriately commented areas at the bottom of the file.
 
 The bot will now tweet the current track and artist with a #Turntablefm hashtag.
 
 ##Blernsball action
 
-This feature is commented out by default for people who could care less about baseball. 
+This feature is commented out by default for people who could care less about baseball.
 To add, use NPM to install mlb, uncomment out the blernsball section, add to the help commands list.
 This command will pull back the latest baseball games and some events happening in them.
 Modify the limit and the loop to retrieve more or less information.
@@ -81,7 +81,7 @@ Everyone:
 ##Administrator/"The Master":
 
 	All commands for the master require the setting for botname to trigger.
-	Commands are not required to be in any order: example - This is a really good song boombot. Will trigger the 'boombot good' command. (replace boombot with whatever you set in the config.json) 
+	Commands are not required to be in any order: example - This is a really good song boombot. Will trigger the 'boombot good' command. (replace boombot with whatever you set in the config.json)
 
 * djmode - make the bot get on stage and DJ
 
@@ -151,6 +151,6 @@ I know nothing about node. This was a playground that seemed to be liked. No war
 
 If you're more experienced than I am and want to tell me how to make this better in any way. I am all ears. Feel free to fork, if you come up with some cool scripts you can request a pull back and I will add them.
 
-Lastly, ENJOY IT!!!!! It's not the best or most feature filled bot, but I appreciate you using him! 
+Lastly, ENJOY IT!!!!! It's not the best or most feature filled bot, but I appreciate you using him!
 See the original and most feature filled version of Boom Bot at [Whistle while you work](http://turntable.fm/whistle_while_you_work43) where he lives.
 Come check out my personal bot [@TerrorBot](http://twitter.com/#!/terrorbot) on twitter and in [while (iCode) { drop.Beatz; } //Infinite Musik](http://turntable.fm/while_icode_dropbeatz_infinite_muzik) where he lives.
