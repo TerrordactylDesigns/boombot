@@ -121,7 +121,7 @@ Modify the limit and the loop to retrieve more or less information.</p>
 
       <h2>Commands</h2>
       <p>
-        <h4>Everyone:</h4>
+        <h3>Everyone:</h3>
         <ul>
           <li>/lyrics - returns lyrics snippet and link to full lyrics from lyrics wiki</li>
           <li>/video - returns a link to a youtube video search for the current song</li>
@@ -143,7 +143,16 @@ Modify the limit and the loop to retrieve more or less information.</p>
           <li>buddy, guy, friend - say any of these in chat and be met with the appropriate line from the South Park episode.</li>
           <li>/blernsball - IF SET UP - returns the latest baseball events as they happen</li>
         </ul><!-- / -->
-        <h4>Administrator/"The Master"</h4>
+        <h4>Queue commands</h4>
+        <ul>
+          <li>/q - gives information on the current queue settings</li>
+          <li>q - list the current queue</li>
+          <li>q+ - add yourself to the queue</li>
+          <li>q- - remove yourself from the queue</li>
+          <li>/plays - list the play counts of each DJ on stage</li>
+          <li>/settings - see the queues current settings</li>
+        </ul>
+        <h3>Administrator/"The Master"</h3>
         <p>These commands are given as: &lt;botname&gt; &lt;command&gt; </p>
         <ul>
           <li>djmode - make the bot get on stage and DJ</li>
@@ -162,16 +171,8 @@ Modify the limit and the loop to retrieve more or less information.</p>
           <li>chrome up - sets the bots laptop to ChromeOS</li>
           <li>droid up - sets the bots laptop to Android phone</li>
         </ul><!-- / -->
-        <h4>Queue commands</h4>
-        <ul>
-          <li>/q - gives information on the current queue settings</li>
-          <li>q - list the current queue</li>
-          <li>q+ - add yourself to the queue</li>
-          <li>q- - remove yourself from the queue</li>
-          <li>/plays - list the play counts of each DJ on stage</li>
-          <li>/settings - see the queues current settings</li>
-        </ul>
-        <h4>Queue control (Room mods ONLY)</h4>
+        <h3>Room Moderator Commands</h3>
+        <h4>Queue Control</h4>
         <ul>
           <li>q on - turn the queue on</li>
           <li>q off - turn the queue off</li>
@@ -179,6 +180,10 @@ Modify the limit and the loop to retrieve more or less information.</p>
           <li>/2 - set the song limit to 2</li>
           <li>/3 - set the song limit to 3</li>
           <li>/none - set the song limit to 100</li>
+        </ul>
+        <h4>Room Administration</h4>
+        <ul>
+          <li>/blacklist &lt;user name&gt; - boots user from the room and auto boots on entrance</li>
         </ul>
       </p>
 
