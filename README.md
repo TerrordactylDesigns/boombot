@@ -1,4 +1,4 @@
-#BOOM BOT v1.4.1
+#BOOM BOT v1.4.2
 
 [![Build Status](https://secure.travis-ci.org/TerrordactylDesigns/boombot.png)](http://travis-ci.org/TerrordactylDesigns/boombot)
 
@@ -56,7 +56,7 @@ Modify the limit and the loop to retrieve more or less information.
 
 ##Commands
 
-Everyone:
+##Everyone:
 
 * /lyrics - returns the first line of the current song and a link to the full lyrics
 * /video - returns a link to a youtube search for the current song playing
@@ -77,6 +77,18 @@ Everyone:
 * 8ball <question> - magic 8 ball answers all
 * buddy, guy, friend - say any of these in chat and be met with the appropriate line from the South Park episode.
 * /blernsball - IF SET UP - returns the latest baseball events as they happen
+
+###Queue commands
+
+* /q - gives information on the current queue settings
+
+* q - list the current queue
+
+* q+ - add yourself to the queue
+
+* q- - remove yourself from the queue
+
+* /plays - list the play counts of each DJ on stage
 
 ##Administrator/"The Master":
 
@@ -113,19 +125,8 @@ Everyone:
 
 * droid up - sets the bots laptop to Android phone
 
-##Queue commands
-
-/q - gives information on the current queue settings
-
-* q - list the current queue
-
-* q+ - add yourself to the queue
-
-* q- - remove yourself from the queue
-
-* /plays - list the play counts of each DJ on stage
-
-##Queue control (Room Mods Only)
+##Room Mods
+###Queue control
 
 * q on - turn the queue on
 
@@ -140,6 +141,10 @@ Everyone:
 * /3 - set the song limit to 3
 
 * /none - set the song limit to 100
+
+###Room administration
+
+* /blacklist <username> - kicks the user from the room, auto kicks them if they come in again. Currently the list will reset if the bot does.
 
 ##Automatic DJ mode
 

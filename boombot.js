@@ -25,7 +25,7 @@ var queue = false;                                  //queue switch
 var yank = false;                                   //variable for pulling dj from stage after play counts
 var queueLength = 3;                                //queue song length initializer
 var timedOut = true;                                //variable for whether a users time period has expired in the queue
-
+global.blackList = [];                              //array of blacklisted jerks
 
 //modify the base array object to check if arrays contain a value
 Array.prototype.contains = function(obj) {
@@ -191,23 +191,28 @@ bot.on('registered',  function (data) {
   if (config.consolelog) {
     console.log('[ EVENT ] : added ' + user.name + ' to theUsersList');
   }
-  //chat announcer
-  if (shutUp == false) {
-    if (data.user[0].userid == config.botinfo.userid) { //boombot announces himself
-      bot.speak(config.responses.botwelcome)
-    } else if (data.user[0].userid == config.admin.userid) { //if the master arrives announce him specifically
-      bot.speak(config.responses.adminwelcome);
-    } else {
-      //check to see if the user is a mod, if not PM them
-      bot.roomInfo(true, function(data2) {
-        var modArray = data2.room.metadata.moderator_id;
-        if (modArray.contains(data.user[0].userid)) { //user is a room mod
-          bot.speak(config.responses.modwelcome);
-        } else {
-          bot.pm(config.responses.welcomepm, data.user[0].userid, function(data) { }); //PM the user
-          bot.speak(config.responses.welcome); //welcome the rest
-        }
-      });
+  //check the blacklist for the dj
+  if (blackList.contains(data.user[0].userid)) {
+    bot.bootUser(data.user[0].userid, "Guess you didn't understand what the term blacklist meant......");
+  } else {
+    //chat announcer
+    if (shutUp == false) {
+      if (data.user[0].userid == config.botinfo.userid) { //boombot announces himself
+        bot.speak(config.responses.botwelcome)
+      } else if (data.user[0].userid == config.admin.userid) { //if the master arrives announce him specifically
+        bot.speak(config.responses.adminwelcome);
+      } else {
+        //check to see if the user is a mod, if not PM them
+        bot.roomInfo(true, function(data2) {
+          var modArray = data2.room.metadata.moderator_id;
+          if (modArray.contains(data.user[0].userid)) { //user is a room mod
+            bot.speak(config.responses.modwelcome);
+          } else {
+            bot.pm(config.responses.welcomepm, data.user[0].userid, function(data) { }); //PM the user
+            bot.speak(config.responses.welcome); //welcome the rest
+          }
+        });
+      }
     }
   }
 });
@@ -822,12 +827,13 @@ bot.on('speak', function (data) {
         });
       }
 
-
       /*
-        QUEUE CONTROL (ROOM ADMINS ONLY)
+        ROOM ADMIN COMMANDS
       */
-
       bot.roomInfo(true, function(data2) {
+        /*
+          QUEUE CONTROL
+        */
         var modArray = data2.room.metadata.moderator_id;
         if (modArray.contains(data.userid)) { //user is a room mod
           if (data.text === 'q on') {
@@ -856,6 +862,23 @@ bot.on('speak', function (data) {
             bot.speak("No limit to songs....");
           }
         }
+        /*
+          BLACKLISTING
+        */
+        if (data.text.match(/^\/blacklist/)) {
+          //need to grab the user name, convert to uid
+          var uNameArray = data.text.split('/blacklist ');
+          var uName = uNameArray[1];
+          // since we only have the users name we need to iterate through all the users unfortunately to find their ID
+          for (user in theUsersList) {
+            if (theUsersList[user].name === uName) {
+              bot.bootUser(user, 'Dont come back.');
+              blackList.push(user);
+            }
+          }
+        }
+
+
       });
     }
 
