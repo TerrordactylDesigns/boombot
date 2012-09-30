@@ -173,6 +173,7 @@ bot.on('roomChanged', function(data) {
   var users = data.users;
   for (var i=0; i<users.length; i++) {
     var user = users[i];
+    user.plays = 0;
     theUsersList[user.userid] = user;
     if (config.consolelog) {
       console.log('[ EVENT ] : added ' + user.name + ' to theUsersList');
@@ -187,6 +188,7 @@ bot.on('registered',  function (data) {
   }
   //add user to the users list object
   var user = data.user[0];
+  user.plays = 0;
   theUsersList[user.userid] = user;
   if (config.consolelog) {
     console.log('[ EVENT ] : added ' + user.name + ' to theUsersList');
@@ -291,7 +293,7 @@ bot.on('endsong', function (data) {
 });
 
 bot.on('booted_user', function (data){
-  //escorted off the stage sh** talk. //note that if you also use the rem_dj function this function will never trigger, the rem_dj will trigger instead
+  //booted from the room sh** talk.
   bot.speak('YEAH, GET THAT DJ OUTTTTTTTTTAAAA HEEERRRREEEEEEE!');
 });
 
