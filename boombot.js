@@ -25,6 +25,7 @@ var queue = false;                                  //queue switch
 var yank = false;                                   //variable for pulling dj from stage after play counts
 var queueLength = 3;                                //queue song length initializer
 var timedOut = true;                                //variable for whether a users time period has expired in the queue
+global.autoNod = false;                             //variable to control autonod
 global.blackList = [];                              //array of blacklisted jerks
 
 //modify the base array object to check if arrays contain a value
@@ -251,9 +252,12 @@ bot.on('update_votes', function (data) {
 bot.on('newsong', function (data){
   //on song start we will reset the snagCounter
   snagCounter = 0;
-  //auto bop. this is no longer allowed by turntable. it is here for informational purposes only. The writer of this software does not condone its use.
-  //bot.bop();
-
+  //auto bop
+    if (autoNod) {
+      setTimeout(function(){
+        bot.bop();
+      }, 10 * 1000);
+    }
   /*
     if the queue is on and the array has more than 0:
     remove any dj that is not the first in array,
@@ -863,6 +867,19 @@ bot.on('speak', function (data) {
             queueLength = 100;
             bot.speak("No limit to songs....");
           }
+        }
+        /*
+          AUTOVOTE
+        */
+        if (data.text.match(/autobop engage/i) && (data.text.match(botNameRegEx))) {
+          bot.speak("Let's dance!");
+          bot.bop();
+          autoNod = true;
+        }
+
+        if (data.text.match(/autobop disengage/i) && (data.text.match(botNameRegEx))) {
+          bot.speak("Real gangstas don't dance.....");
+          autoNod = false;
         }
         /*
           BLACKLISTING
