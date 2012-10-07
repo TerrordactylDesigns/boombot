@@ -144,9 +144,9 @@ Modify the limit and the loop to retrieve more or less information.
 
 ###Room administration
 
-* <botname> autobop engage - turns on auto awesome. If there is only one voting bot in the room this is allowed.
+* (botname) autobop engage - turns on auto awesome. If there is only one voting bot in the room this is allowed.
 
-* <botname> autobop disengage - turn off auto awesome
+* (botname) autobop disengage - turn off auto awesome
 
 * /blacklist <username> - kicks the user from the room, auto kicks them if they come in again. Currently the list will reset if the bot does.
 
