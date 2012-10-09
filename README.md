@@ -1,4 +1,4 @@
-#BOOM BOT v1.4.5
+#BOOM BOT v1.4.6
 
 [![Build Status](https://secure.travis-ci.org/TerrordactylDesigns/boombot.png)](http://travis-ci.org/TerrordactylDesigns/boombot)
 
@@ -78,6 +78,7 @@ Modify the limit and the loop to retrieve more or less information.
 * /winning - random Charlie Sheen quote from the API
 * 8ball <question> - magic 8 ball answers all
 * buddy, guy, friend - say any of these in chat and be met with the appropriate line from the South Park episode.
+* /version - see what version is running
 * /blernsball - IF SET UP - returns the latest baseball events as they happen
 
 ###Queue commands

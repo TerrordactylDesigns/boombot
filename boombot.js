@@ -397,6 +397,10 @@ bot.on('speak', function (data) {
        if (data.text.match(/^\/boombot$/)) {
           bot.speak('BOOM BOT ' + config.version + ' \n\r Coded by: http://GPlus.to/TerrordactylDesigns/ \n\r Acquire your own at https://github.com/TerrordactylDesigns/boombot'); //note that line break and return does not appear in the web browser. However, it does appear on iPhone chat window.
        }
+       // Respond to "/version" command
+       if (data.text.match(/^\/version$/)) {
+          bot.speak('BOOM BOT ' + config.version);
+       }
        // Respond to "/help" command
        if (data.text.match(/^\/help$/)) {
           bot.speak('My current command list is /hello, /help, /rules, /lyrics, /video, /boo, /cheer, /haters, meow, /rich, /chuck, /winning, 8ball <question>, /google <search terms>, /boombot. Plus a few hidden ones ;) remember to check for new updates!');
