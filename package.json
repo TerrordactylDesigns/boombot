@@ -1,6 +1,6 @@
 {
 	"name": "boombot",
-	"version": "1.4.4",
+	"version": "1.4.5",
 	"author": "TerrordactylDesigns <Mbelardo1@gmail.com>",
 	"description": "chat and DJ bot for turntable.fm",
 	"contributors": [
@@ -14,7 +14,7 @@
 		"url": "https://github.com/TerrordactylDesigns/boombot.git"
 	},
 	"dependencies": {
-		"ttapi"	:	"> 1.2.x"
+		"ttapi"	:	">= 1.5.x"
 	},
 	"license": "MIT",
 	"engine": {

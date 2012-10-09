@@ -1,4 +1,4 @@
-#BOOM BOT v1.4.4
+#BOOM BOT v1.4.5
 
 [![Build Status](https://secure.travis-ci.org/TerrordactylDesigns/boombot.png)](http://travis-ci.org/TerrordactylDesigns/boombot)
 
@@ -28,6 +28,8 @@ Now use the same method to get your personal accounts user id for control of the
 Open config.json in Sublime text 2 (Or your editor of choice... but really... go get sublime... its great..)
 replace the xxxxxxxxxxxxxxxxxxxxxxxx's in the botinfo section with your bots auth, bot id, and replace the xxxxxxxxxxxx's in the admin section your own personal user id.
 replace botname in the botinfo section with what you want to call the bot.
+
+Modify any welcome messages as desired. For welcome, adminwelcome, modwelcome XXXX will be replaced with the Djs name.
 
 Add to the arrays and/or commands in boombot.js anything you want to add or change. Would be nice of you to keep the url to obtain your own copy under the /boombot command, but I won't hunt you down if you want it to go.
 

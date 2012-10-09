@@ -203,16 +203,16 @@ bot.on('registered',  function (data) {
       if (data.user[0].userid == config.botinfo.userid) { //boombot announces himself
         bot.speak(config.responses.botwelcome)
       } else if (data.user[0].userid == config.admin.userid) { //if the master arrives announce him specifically
-        bot.speak(config.responses.adminwelcome);
+        bot.speak(config.responses.adminwelcome.replace('XXXX', data.user[0].name));
       } else {
         //check to see if the user is a mod, if not PM them
         bot.roomInfo(true, function(data2) {
           var modArray = data2.room.metadata.moderator_id;
           if (modArray.contains(data.user[0].userid)) { //user is a room mod
-            bot.speak(config.responses.modwelcome);
+            bot.speak(config.responses.modwelcome.replace('XXXX', data.user[0].name));
           } else {
             bot.pm(config.responses.welcomepm, data.user[0].userid, function(data) { }); //PM the user
-            bot.speak(config.responses.welcome); //welcome the rest
+            bot.speak(config.responses.welcome.replace('XXXX', data.user[0].name)); //welcome the rest
           }
         });
       }
