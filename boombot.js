@@ -24,9 +24,10 @@ var djQueue = [];                                   //queue array
 var queue = false;                                  //queue switch
 var yank = false;                                   //variable for pulling dj from stage after play counts
 var queueLength = 3;                                //queue song length initializer
-var timedOut = true;                                //variable for whether a users time period has expired in the queue
 global.autoNod = false;                             //variable to control autonod
 global.blackList = [];                              //array of blacklisted jerks
+var nextUp = {};                                    //object for the dj we are waiting on
+var version = "V1.4.7"
 
 //modify the base array object to check if arrays contain a value
 Array.prototype.contains = function(obj) {
@@ -39,20 +40,18 @@ Array.prototype.contains = function(obj) {
     return false;
 }
 //timer for queue control
-function timeUp() {
-  if (timedOut) {
-    djQueue.splice(0,1);
-    if (djQueue.length != 0) {
-      var nextUp = theUsersList[djQueue[0]].name;
-      bot.speak('@' + nextUp + ' you have 30 seconds starting now to step up..');
-      if (djQueue.length != 0) {
-        setTimeout(function(){
-          timeUp();
-        }, 30 * 1000);
+function runQueue(currDjs) {
+  if (djQueue.length > 0 && currDjs.length < 5) {
+    // store the users name and id to stop the recursion insanity i had going on
+    var nextUp = {"name" : theUsersList[djQueue[0]].name, "id" : djQueue[0]};
+    bot.speak('@' + nextUp.name + ' you have 30 seconds starting now to step up');
+    setTimeout(function(){
+      // after 30 seconds if that user isnt on stage drop them from queue, hear the lamentation of their women, and run again.
+      if (djQueue.length > 0 && djQueue[0] == nextUp.id) {
+        djQueue.splice(0,1);
+        runQueue(currDjs);
       }
-    }
-  } else {
-    timedOut = true;
+    }, 30 * 1000);
   }
 }
 //remove the user from the queue
@@ -263,18 +262,12 @@ bot.on('newsong', function (data){
     remove any dj that is not the first in array,
     after 30 seconds remove them from the array - announce next if there
   */
+  theUsersList[data.room.metadata.current_dj].plays += 1;
   if (queue) {
     //  get the array of current DJs
     var currDjs = data.room.metadata.djs;
     //  find the next DJ allowed up
-    if ((djQueue.length != 0) && (currDjs.length < 5)) {
-      var nextUp = theUsersList[djQueue[0]].name;
-      bot.speak('@' + nextUp + ' you have 30 seconds starting now to step up');
-      setTimeout(function(){
-            timeUp();
-      }, 30 * 1000);
-    }
-    theUsersList[data.room.metadata.current_dj].plays += 1;
+    runQueue(currDjs);
   }
 });
 
@@ -332,11 +325,12 @@ bot.on('add_dj', function (data) {
     //  check the users ID and compare to position 0 of q array
     if (data.user[0].userid != djQueue[0] && djQueue.length > 0) {
       //  yank the user if they are not position 0
+      yank = true;
       bot.remDj(data.user[0].userid);
       bot.speak('Not your turn @' + data.user[0].name + " type q to see the order, or q+ to add yourself.");
     } else {
       djQueue.splice(0,1);
-      timedOut = false;
+      nextUp = {};
       theUsersList[data.user[0].userid].plays = 0;
     }
   }
@@ -361,11 +355,14 @@ bot.on('rem_dj', function (data) {
   });
   if (queue) {
     if (djQueue.length > 0) {
-      var nextUp = theUsersList[djQueue[0]].name;
-      bot.speak('@' + nextUp + ' you have 30 seconds starting now to step up..');
-      setTimeout(function(){
-            timeUp();
-      }, 30 * 1000);
+      if (yank) {
+        yank = false;
+      } else {
+        bot.roomInfo(true, function(data2) {
+          var currDjs = data2.room.metadata.djs;
+          runQueue(currDjs);
+        });
+      }
     }
   }
 });

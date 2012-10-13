@@ -20,6 +20,5 @@
     "modwelcome" : "Welcome back XXXX. Obediance routine initiated.",
     "welcome" : "Welcome to the room XXXX! Type /help to learn how to control me!",
     "welcomepm" : "Welcome to the room. Please read the rules. Or, don't and get thrown out."
-  },
-  "version" : "1.4.6"
+  }
 }
