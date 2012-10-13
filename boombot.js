@@ -27,7 +27,7 @@ var queueLength = 3;                                //queue song length initiali
 global.autoNod = false;                             //variable to control autonod
 global.blackList = [];                              //array of blacklisted jerks
 var nextUp = {};                                    //object for the dj we are waiting on
-var version = "V1.4.7"
+var version = "V1.4.8"
 
 //modify the base array object to check if arrays contain a value
 Array.prototype.contains = function(obj) {
@@ -392,11 +392,11 @@ bot.on('speak', function (data) {
        }
        // Respond to "/boombot" command
        if (data.text.match(/^\/boombot$/)) {
-          bot.speak('BOOM BOT ' + config.version + ' \n\r Coded by: http://GPlus.to/TerrordactylDesigns/ \n\r Acquire your own at https://github.com/TerrordactylDesigns/boombot'); //note that line break and return does not appear in the web browser. However, it does appear on iPhone chat window.
+          bot.speak('BOOM BOT ' + version + ' \n\r Coded by: http://GPlus.to/TerrordactylDesigns/ \n\r Acquire your own at https://github.com/TerrordactylDesigns/boombot'); //note that line break and return does not appear in the web browser. However, it does appear on iPhone chat window.
        }
        // Respond to "/version" command
        if (data.text.match(/^\/version$/)) {
-          bot.speak('BOOM BOT ' + config.version);
+          bot.speak('BOOM BOT ' + version);
        }
        // Respond to "/help" command
        if (data.text.match(/^\/help$/)) {
