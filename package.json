@@ -25,8 +25,7 @@
     "test": "tap test/*.js"
   },
   "dependencies": {
-    "ttapi" : "> 1.5.x",
-    "ntwitter" : ">= 1.x.x"
+    "ttapi" : "> 1.5.x"
   },
   "devDependencies": {
     "tap": "0.2.x"
