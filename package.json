@@ -1,23 +1,38 @@
 {
-	"name": "boombot",
-	"version": "1.4.8",
-	"author": "TerrordactylDesigns <Mbelardo1@gmail.com>",
-	"description": "chat and DJ bot for turntable.fm",
-	"contributors": [
-		{
-			"name": "Michael Belardo",
-			"email": "Mbelardo1@gmail.com"
-		}
-	],
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/TerrordactylDesigns/boombot.git"
-	},
-	"dependencies": {
-		"ttapi"	:	">= 1.5.x"
-	},
-	"license": "MIT",
-	"engine": {
-		"node": ">=0.6"
-	}
+  "name": "boombot",
+  "version": "2.0.0",
+  "main": "boombot.js",
+  "author": "TerrordactylDesigns <Mbelardo1@gmail.com>",
+  "description": "chat and DJ bot for turntable.fm",
+  "contributors": [
+    {
+      "name": "Michael Belardo",
+      "email": "Mbelardo1@gmail.com"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TerrordactylDesigns/boombot2.git"
+  },
+  "directories": {
+    "lib": "lib",
+    "test": "test",
+    "bin" : "bin",
+    "models" : "models",
+    "scripts" : "scripts"
+  },
+  "scripts": {
+    "test": "tap test/*.js"
+  },
+  "dependencies": {
+    "ttapi" : "> 1.5.x",
+    "ntwitter" : ">= 1.x.x"
+  },
+  "devDependencies": {
+    "tap": "0.2.x"
+  },
+  "license": "MIT",
+  "engine": {
+    "node": ">=0.6.0"
+  }
 }
