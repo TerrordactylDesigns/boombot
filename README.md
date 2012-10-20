@@ -1,6 +1,3 @@
-#UNDER CONSTRUCTION - Same bot, just written differently....
-#Not fully operational until this message is gone
-
 #BOOM BOT V2.0.0
 
 A bot for turntable.fm
