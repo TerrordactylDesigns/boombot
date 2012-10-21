@@ -1,4 +1,4 @@
-#BOOM BOT V2.0.1
+#BOOM BOT V2.0.2
 
 [![Build Status](https://secure.travis-ci.org/TerrordactylDesigns/boombot.png)](http://travis-ci.org/TerrordactylDesigns/boombot)
 

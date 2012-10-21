@@ -37,44 +37,53 @@ try {
   console.log('[ ERROR ] : Error loading config.json. Check that your config file exists and is valid JSON.');
   process.exit(33);
 }
-/**/// Private: loads core scripts from lib/core
+/**/// Public: Loads all the command files from each location
 /**///
 /**/// Returns
-/**/// return - for each command in the base_controls array we will build the commands array
-console.log("*******Loading Core Scripts********");
-var base_controls = require('../lib/core/base_controls');
-for (i = 0; i < base_controls.length; i++) {
-  console.log('Loading: ' + base_controls[i].trigger);
-  commands.push(base_controls[i]);
-}
-/**/// Private: loads queue scripts from lib/core
-/**///
-/**/// Returns
-/**/// return - for each command in the queue_controls array we will build the commands array
-console.log("*******Loading Queue Scripts********");
-var queue_controls = require('../lib/core/queue_controls');
-for (i = 0; i < queue_controls.length; i++) {
-  console.log('Loading: ' + queue_controls[i].trigger);
-  commands.push(queue_controls[i]);
-}
-/**/// Private: loads scripts from optional scripts folder
-/**///
-/**/// Returns
-/**/// return - for each file in the scripts folder we will build the commands array
-try {
-  var filenames = fs.readdirSync('./scripts');
-  console.log("*****Loading Optional Scripts******");
-  for (i = 0; i < filenames.length; i++) {
-    if (filenames[i] != ".DS_Store") {
-      console.log("Loading: " + filenames[i]);
-      var command = require('../scripts/' + filenames[i]);
-      commands.push({'trigger': command.trigger, 'listed': command.listed, 'script': command.script});
-    }
+/**/// return - fills commands array from all command sources
+var loadCommands = function() {
+  /**/// Private: loads core scripts from lib/core
+  /**///
+  /**/// Returns
+  /**/// return - for each command in the base_controls array we will build the commands array
+  console.log("*******Loading Core Scripts********");
+  var base_controls = require('../lib/core/base_controls');
+  for (i = 0; i < base_controls.length; i++) {
+    console.log('Loading: ' + base_controls[i].trigger);
+    commands.push(base_controls[i]);
   }
-} catch(err) {
-  console.log(err);
-  console.log("[ ERROR ] : Error loading script(s). Please fix or remove the failed script(s) shown above");
+  /**/// Private: loads queue scripts from lib/core
+  /**///
+  /**/// Returns
+  /**/// return - for each command in the queue_controls array we will build the commands array
+  console.log("*******Loading Queue Scripts********");
+  var queue_controls = require('../lib/core/queue_controls');
+  for (i = 0; i < queue_controls.length; i++) {
+    console.log('Loading: ' + queue_controls[i].trigger);
+    commands.push(queue_controls[i]);
+  }
+  /**/// Private: loads scripts from optional scripts folder
+  /**///
+  /**/// Returns
+  /**/// return - for each file in the scripts folder we will build the commands array
+  try {
+    var filenames = fs.readdirSync('./scripts');
+    console.log("*****Loading Optional Scripts******");
+    for (i = 0; i < filenames.length; i++) {
+      if (filenames[i] != ".DS_Store") {
+        console.log("Loading: " + filenames[i]);
+        var command = require('../scripts/' + filenames[i]);
+        commands.push({'trigger': command.trigger, 'listed': command.listed, 'script': command.script});
+      }
+    }
+  } catch(err) {
+    console.log(err);
+    console.log("[ ERROR ] : Error loading script(s). Please fix or remove the failed script(s) shown above");
+  }
+  return commands;
 }
+loadCommands();
+exports.LoadCommands = loadCommands;
 /**/// Public: where does he get those wonderful toys?
 /**///
 /**/// Args
