@@ -26,7 +26,6 @@
     "masterdjmode" : "The Master has taken the stage! Bow before XXX!",
     "djmode" : "XXX has taken the stage to amuse my master."
   },
-  "version" : "2.0.0",
   "twitter" :
   {
     "tweet" : false,

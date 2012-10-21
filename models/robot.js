@@ -26,7 +26,7 @@ var Robot = function(boombot, events, commands, config) {
   this.autoNod = false;
   this.nextUp = {};
   this.blackList = [];
-  this.version = 'V2.0.0';
+  this.version = 'V2.0.1';
 };
 /**/// Public: Remove a user from the Dj Queue
 /**///
