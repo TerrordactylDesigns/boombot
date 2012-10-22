@@ -21,6 +21,6 @@ exports.script = function(boombot, data) {
       "http://www.protias.com/Pictures/Super%20Troopers/meow.jpg",
       "http://sphotos.ak.fbcdn.net/hphotos-ak-snc3/hs195.snc3/20275_304481852744_293714027744_3524059_4812190_n.jpg"
   ];
-  var rndm = (Math.round((Math.random()*8)+1));
+  var rndm = Math.floor(Math.random() * 10);
   boombot.bot.speak(meowList[rndm]);
 }
