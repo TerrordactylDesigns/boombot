@@ -21,7 +21,7 @@ exports.loadBot = function(config) {
 /**///
 /**/// Returns
 /**/// return - a fully operational battle station
-exports.run = function(bot, events, commands, config) {
+exports.run = function(bot, events, commands, config, version) {
   var robot = require('./lib/robot');
-  return robot.run(bot, events, commands, config);
+  return robot.run(bot, events, commands, config, version);
 };

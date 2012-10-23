@@ -6,6 +6,7 @@ var events = require('../lib/events');
 var fs = require('fs');
 var config;
 var commands = [];
+var version = 'V2.0.4';
 //modify the base array object to check if arrays contain a value
 Array.prototype.contains = function(obj) {
     var i = this.length;
@@ -29,7 +30,7 @@ try {
   config = JSON.parse(fs.readFileSync('config.json', 'ascii'));
   console.log("*******Configuration Loaded********");
   console.log("***********************************");
-  console.log("***********BOOMBOT " + config.version + "***********");
+  console.log("**********BOOMBOT "+version+"***********");
   console.log("***********************************");
   console.log("*******Initializing Systems********");
 } catch(err) {
@@ -93,4 +94,4 @@ exports.LoadCommands = loadCommands;
 /**/// Returns
 /**/// return - a shiny new robot
 var bot = Boombot.loadBot(config);
-var boombot = Boombot.run(bot, events, commands, config);
+var boombot = Boombot.run(bot, events, commands, config, version);

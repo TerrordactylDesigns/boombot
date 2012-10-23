@@ -9,7 +9,7 @@
 /**/// Returns
 /**/// return - a robot linked to events, config, commands, and has
 /**///          variables set to defaults
-var Robot = function(boombot, events, commands, config) {
+var Robot = function(boombot, events, commands, config, version) {
   this.bot = boombot;
   this.config = config;
   this.events = events;
@@ -26,7 +26,7 @@ var Robot = function(boombot, events, commands, config) {
   this.autoNod = false;
   this.nextUp = {};
   this.blackList = [];
-  this.version = 'V2.0.3';
+  this.version = version;
 };
 /**/// Public: Remove a user from the Dj Queue
 /**///
