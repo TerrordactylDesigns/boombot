@@ -1,4 +1,4 @@
-{
+module.exports = {
   "botinfo" :
   {
     "auth" : "auth+live+xxxxxxxxxxxxxxxxxxxxxx",
@@ -21,9 +21,11 @@
     "adminwelcome" : "My master has arrived!",
     "modwelcome" : "Welcome back XXX.",
     "welcome" : "Welcome to the room XXX! Type /help to learn how to control me!",
-    "welcomepm" : "Welcome to the room. Please read the rules. Or, don't and get thrown out."
+    "welcomepm" : "Welcome to the room. Please read the rules. Or, don't and get thrown out.",
+    "botdjmode" : "Aural destruction mode activated.",
+    "masterdjmode" : "The Master has taken the stage! Bow before XXX!",
+    "djmode" : "XXX has taken the stage to amuse my master."
   },
-  "version" : "2.0.0",
   "twitter" :
   {
     "tweet" : false,
