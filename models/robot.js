@@ -9,11 +9,12 @@
 /**/// Returns
 /**/// return - a robot linked to events, config, commands, and has
 /**///          variables set to defaults
-var Robot = function(boombot, events, commands, config, version) {
+var Robot = function(boombot, events, commands, config, blacklist, version) {
   this.bot = boombot;
   this.config = config;
   this.events = events;
   this.commands = commands;
+  this.blackList = blacklist;
   this.modCommands = require('../lib/core/admin_controls');
   this.theUsersList = {};
   this.shutUp = false;
@@ -25,7 +26,6 @@ var Robot = function(boombot, events, commands, config, version) {
   this.queueLength = 3;
   this.autoNod = false;
   this.nextUp = {};
-  this.blackList = [];
   this.version = version;
 };
 /**/// Public: Remove a user from the Dj Queue

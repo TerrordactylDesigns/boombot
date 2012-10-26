@@ -1,4 +1,4 @@
-#BOOM BOT V2.0.4
+#BOOM BOT V2.0.5
 
 [![Build Status](https://secure.travis-ci.org/TerrordactylDesigns/boombot.png)](http://travis-ci.org/TerrordactylDesigns/boombot)
 
@@ -68,6 +68,10 @@ node bin/boombot
 * chrome up - sets the bots laptop to ChromeOS
 
 * droid up - sets the bots laptop to Android phone
+
+* blacklist <username> - bans user from the room
+
+* listbans - lists banned users, the mod who banned them, and when they were banned
 
 ##Queue commands
 
