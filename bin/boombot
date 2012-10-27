@@ -7,7 +7,7 @@ var fs = require('fs');
 var config;
 var blacklist;
 var commands = [];
-var version = 'V2.0.5';
+var version = 'V2.0.6';
 //modify the base array object to check if arrays contain a value
 Array.prototype.contains = function(obj) {
     var i = this.length;
