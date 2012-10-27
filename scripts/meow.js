@@ -7,7 +7,7 @@
 /**/// Notes: None
 exports.trigger = 'meow';
 exports.listed = true;
-exports.script = function(boombot, data) {
+exports.script = function(boombot, text, uname, uid, private) {
   //meow array
   var meowList = [
       "Do I look like a cat to you, boy? Am I jumpin' around all nimbly bimbly from tree to tree?",
@@ -22,5 +22,5 @@ exports.script = function(boombot, data) {
       "http://sphotos.ak.fbcdn.net/hphotos-ak-snc3/hs195.snc3/20275_304481852744_293714027744_3524059_4812190_n.jpg"
   ];
   var rndm = Math.floor(Math.random() * 10);
-  boombot.bot.speak(meowList[rndm]);
+  boombot.respond(uid, meowList[rndm], private);
 }
