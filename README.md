@@ -1,4 +1,4 @@
-#BOOM BOT V2.0.6
+#BOOM BOT V2.0.7
 
 [![Build Status](https://secure.travis-ci.org/TerrordactylDesigns/boombot.png)](http://travis-ci.org/TerrordactylDesigns/boombot)
 
@@ -33,6 +33,9 @@ Download [Boombots Scripts](https://github.com/TerrordactylDesigns/Boombot-Scrip
 path to the saved location and run:
 node bin/boombot
 
+##Commands
+
+Commands can be entered in chat or via PM to the bot
 
 ##Administrator/"The Master":
 
