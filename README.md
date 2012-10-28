@@ -42,6 +42,8 @@ Commands can be entered in chat or via PM to the bot
   All commands for the master require the setting for botname to trigger.
   Commands are not required to be in any order: example - This is a really good song boombot. Will trigger the 'boombot good' command. (replace boombot with whatever you set in the config.json)
 
+* say - says in chat whatever you tell him to through pm
+
 * djmode - make the bot get on stage and DJ
 
 * getdown - make the bot get off stage
