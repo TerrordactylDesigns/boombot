@@ -8,5 +8,5 @@
 exports.trigger = '/hello';
 exports.listed = true;
 exports.script = function(boombot, text, uname, uid, private) {
-  boombot.respond(uid, 'Hai '+data.name+'!', private);
+  boombot.respond(uid, 'Hai '+uname+'!', private);
 }
