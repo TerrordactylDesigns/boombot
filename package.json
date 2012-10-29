@@ -1,6 +1,6 @@
 {
   "name": "boombot",
-  "version": "2.0.7",
+  "version": "2.0.8",
   "main": "bin/boombot.js",
   "author": "TerrordactylDesigns <Mbelardo1@gmail.com>",
   "description": "chat and DJ bot for turntable.fm",
