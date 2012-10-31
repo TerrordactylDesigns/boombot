@@ -110,6 +110,10 @@ Commands can be entered in chat or via PM to the bot
 
 Boom Bot will hop up to save the day if the room drops to just 1 active DJ. He will hop back down again when a second DJ takes the stage.
 
+##Tests
+
+  npm test
+
 ##Notes
 
 I know nothing about node. This was a playground that seemed to be liked. No warranties, no guarantees. I will however help you to the best that I can if you have any issues or find any bugs.
