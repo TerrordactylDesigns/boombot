@@ -12,12 +12,16 @@ Call out haters, etc
 
   Node.js
   NPM
-  ttapi - https://github.com/alaingilbert/Turntable-API
 
 ##Setup
 
-once you have node running, npm,
-and the ttapi installed:
+* install Node.js and NPM
+
+* Use your command shell of choice to get to the folder you want to install too.
+
+* npm install boombot
+
+* Drill to the node_modules/boombot folder and follow the below instructions
 
 Create a FB or twitter account for your new bot.
 Log in as the bot and use this to get your bots uid, auth token, and your rooms id:
@@ -30,8 +34,9 @@ replace botname in the botinfo section with what you want to call the bot.
 
 Download [Boombots Scripts](https://github.com/TerrordactylDesigns/Boombot-Scripts) and copy the ones you want into the scripts folder.
 
-path to the saved location and run:
-node bin/boombot
+All that done? Ready for the magic?
+
+    node bin/boombot
 
 ##Commands
 
