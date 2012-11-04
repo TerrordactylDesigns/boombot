@@ -1,15 +1,15 @@
 /**/// Public: DJ object class
 /**///
 /**/// Args
-/**/// name - Dj name
+/**/// name   - Dj name
 /**/// userid - Dj user id
 /**///
 /**/// Returns
 /**/// return - A Dj object for queue and event processing
 var DJ = function(name, userid) {
-  this.name = name
+  this.name   = name
   this.userid = userid
-  this.plays = 0
+  this.plays  = 0
 }
 /**/// Public: Set Dj play count to 0
 /**///

@@ -3,20 +3,20 @@
 */
 var test = require('tap').test
   , blankBoombot = function() {
-      this.autoNod = false
-      this.blackList = []
-      this.bot = {}
-      this.config = {consolelog: false, responses:{ blackisted: 'you were blacklisted'}}
-      this.DJMode = false
-      this.djQueue = []
-      this.nextUp = {}
-      this.queue = false
-      this.queueLength = 3
-      this.RemoveFromQueue = null
-      this.shutUp = true
-      this.snagCounter = 0
-      this.theUsersList = {}
-      this.yank = false
+      this.autoNod          = false
+      this.blackList        = []
+      this.bot              = {}
+      this.config           = {consolelog: false, responses:{ blackisted: 'you were blacklisted'}}
+      this.DJMode           = false
+      this.djQueue          = []
+      this.nextUp           = {}
+      this.queue            = false
+      this.queueLength      = 3
+      this.RemoveFromQueue  = null
+      this.shutUp           = true
+      this.snagCounter      = 0
+      this.theUsersList     = {}
+      this.yank             = false
     }
 // im lazy
 Array.prototype.contains = function(obj) {
@@ -30,5 +30,5 @@ Array.prototype.contains = function(obj) {
   TESTS
 */
 var eventstests = require('./eventstests')(test, blankBoombot)
-  , loadtests = require('./loadtests')(test, blankBoombot)
+  , loadtests   = require('./loadtests')(test, blankBoombot)
   , modelstests = require('./modelstests')(test, blankBoombot)

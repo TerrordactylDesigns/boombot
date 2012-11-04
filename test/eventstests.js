@@ -1,13 +1,13 @@
 /*
   Variables
 */
-var deregisteredData = require('./fixtures/deregisteredData')
-  , endsongData = require('./fixtures/endsongData')
-  , events = require('../lib/events')
-  , newsongData = require('./fixtures/newsongData')
-  , registeredData = require('./fixtures/registeredData')
-  , roomChangedData = require('./fixtures/roomChangedData')
-  , snaggedData = null
+var deregisteredData  = require('./fixtures/deregisteredData')
+  , endsongData       = require('./fixtures/endsongData')
+  , events            = require('../lib/events')
+  , newsongData       = require('./fixtures/newsongData')
+  , registeredData    = require('./fixtures/registeredData')
+  , roomChangedData   = require('./fixtures/roomChangedData')
+  , snaggedData       = null
 /*
   TESTS
 */
@@ -42,7 +42,7 @@ test('test that the user is added to theUsersList', function(t) {
 })
 // verify banned users are booted
 test('test that a blacklisted user is booted on registeredEvent', function(t) {
-  var actual = null
+  var actual  = null
     , boombot = new blankBoombot()
   boombot.bot = {
     bootUser : function(userid, message) {
@@ -67,7 +67,7 @@ test('test that the user is removed from theUsersList', function(t) {
 })
 // tests for queue removal
 test('test that the user is removed from the queue on deregisteredEvent', function(t) {
-  var actual = null
+  var actual  = null
     , boombot = new blankBoombot()
   boombot.djQueue = ['1234', '4321', '50073697eb35c17ea7000039']
   boombot.RemoveFromQueue = function(id, name) {
@@ -94,7 +94,7 @@ test('test newsongEvent resets the snagCounter', function(t) {
 // verify the current Djs play count increments
 test('test that the current Dj\'s play count increments on newsongEvent', function(t) {
   var boombot = new blankBoombot()
-    , testDj = require('../models/dj')
+    , testDj  = require('../models/dj')
   boombot.theUsersList['4f4ce636a3f7512f70000fef'] = new testDj('@GodOfThisAge', '4f4ce636a3f7512f70000fef')
   events.newsongEvent(boombot, newsongData)
   t.equal(boombot.theUsersList['4f4ce636a3f7512f70000fef'].plays, 1, 'current Dj play count is incremented on newsongEvent')
@@ -117,7 +117,7 @@ test('test snaggedEvent increments snagCounter', function(t) {
 */
 // verify stats are spoken
 test('test that the after song stats are parsed and spoken on endsongEvent', function(t) {
-  var actual = null
+  var actual  = null
     , boombot = new blankBoombot()
   boombot.bot = {
     speak: function(text) {
@@ -133,9 +133,9 @@ test('test that the after song stats are parsed and spoken on endsongEvent', fun
 })
 // test for queue removals if valid
 test('test that the Dj is removed if their play count is higher than the q max', function(t) {
-  var actual = false
+  var actual  = false
     , boombot = new blankBoombot()
-    , testDj = require('../models/dj')
+    , testDj  = require('../models/dj')
   boombot.bot = {
     remDj : function(x) {
       actual = true
@@ -151,15 +151,15 @@ test('test that the Dj is removed if their play count is higher than the q max',
 })
 // test to make sure you are not removed if the q limit is not met
 test('test that the Dj is not removed if their play count is less than the q max', function(t) {
-  var actual = false
+  var actual  = false
     , boombot = new blankBoombot()
-    , testDj = require('../models/dj')
+    , testDj  = require('../models/dj')
   boombot.bot = {
     remDj : function(x) {
       actual = true
     }
   }
-  boombot.queue = true
+  boombot.queue       = true
   boombot.queueLength = 3
   boombot.theUsersList['4deadb0f4fe7d013dc0555f1'] = new testDj('@GodOfThisAge', '4f4ce636a3f7512f70000fef')
   boombot.theUsersList['4deadb0f4fe7d013dc0555f1'].plays = 2

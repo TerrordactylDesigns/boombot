@@ -2,12 +2,12 @@
               VARIABLES
 <><><><><><><><><><><><><><><><><><><>*/
 var blacklist
-  , Boombot = require('..')
-  , commands = []
-  , config = {}
-  , events = require('../lib/events')
-  , load = require('../lib/load')
-  , version = 'V2.1.0'
+  , Boombot   = require('..')
+  , commands  = []
+  , config    = {}
+  , events    = require('../lib/events')
+  , load      = require('../lib/load')
+  , version   = 'V2.1.0'
 //modify the base array object to check if arrays contain a value
 Array.prototype.contains = function(obj) {
   var i = this.length

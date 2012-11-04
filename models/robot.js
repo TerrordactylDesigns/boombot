@@ -1,42 +1,42 @@
 /**/// Public: Robot class with all variables
 /**///
 /**/// Args
-/**/// boombot - a ttapi bot instance
-/**/// events - event router file
+/**/// boombot  - a ttapi bot instance
+/**/// events   - event router file
 /**/// commands - array of commands
-/**/// config - parsed config.json object
+/**/// config   - parsed config.json object
 /**///
 /**/// Returns
-/**/// return - a robot linked to events, config, commands, and has
+/**/// return   - a robot linked to events, config, commands, and has
 /**///          variables set to defaults
 var Robot = function(boombot, events, commands, config, blacklist, version) {
-  this.bot = boombot
-  this.config = config
-  this.events = events
-  this.commands = commands
-  this.blackList = blacklist
-  this.modCommands = require('../lib/core/admin_controls')
+  this.bot          = boombot
+  this.config       = config
+  this.events       = events
+  this.commands     = commands
+  this.blackList    = blacklist
+  this.modCommands  = require('../lib/core/admin_controls')
   this.theUsersList = {}
-  this.shutUp = false
-  this.snagCounter = 0
-  this.DJMode = false
-  this.djQueue = []
-  this.queue = false
-  this.yank = false
-  this.queueLength = 3
-  this.autoNod = false
-  this.nextUp = {}
-  this.version = version
+  this.shutUp       = false
+  this.snagCounter  = 0
+  this.DJMode       = false
+  this.djQueue      = []
+  this.queue        = false
+  this.yank         = false
+  this.queueLength  = 3
+  this.autoNod      = false
+  this.nextUp       = {}
+  this.version      = version
 }
 /**/// Public: respond via chat or pm
 /**///
 /**/// Args
-/**/// userid - the users id
-/**/// text - the response
-/**/// private - boolean for pm or chat response
+/**/// userid   - the users id
+/**/// text     - the response
+/**/// private  - boolean for pm or chat response
 /**///
 /**/// Returns
-/**/// return - chat or pm response of command
+/**/// return   - chat or pm response of command
 Robot.prototype.respond = function(userid, text, private) {
   if (private)
     this.bot.pm(text, userid, function(data) { }) //PM the user
@@ -46,11 +46,11 @@ Robot.prototype.respond = function(userid, text, private) {
 /**/// Public: Remove a user from the Dj Queue
 /**///
 /**/// Args
-/**/// userID - the userID of the Dj to remove
+/**/// userID   - the userID of the Dj to remove
 /**/// userName - the name of the Dj to remove
 /**///
 /**/// Returns
-/**/// return - speech event of confirmation
+/**/// return   - speech event of confirmation
 Robot.prototype.RemoveFromQueue = function(userID, userName, private) {
   var DJIndex = this.djQueue.indexOf(userID)
   if (DJIndex != -1) {
@@ -66,10 +66,10 @@ Robot.prototype.RemoveFromQueue = function(userID, userName, private) {
 /**/// Public: Run the queue
 /**///
 /**/// Args
-/**/// currDjs - array of current Djs on stage
+/**/// currDjs  - array of current Djs on stage
 /**///
 /**/// Returns
-/**/// return - Timer controlled announcement and enforcement of Queue
+/**/// return   - Timer controlled announcement and enforcement of Queue
 Robot.prototype.runQueue = function() {
   var self = this
   this.bot.roomInfo(false, function(data){
