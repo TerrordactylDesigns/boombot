@@ -29,6 +29,6 @@ Array.prototype.contains = function(obj) {
 /*
   TESTS
 */
-var boombottests = require('./boombottests')(test, blankBoombot)
-  , eventstests = require('./eventstests')(test, blankBoombot)
+var eventstests = require('./eventstests')(test, blankBoombot)
+  , loadtests = require('./loadtests')(test, blankBoombot)
   , modelstests = require('./modelstests')(test, blankBoombot)

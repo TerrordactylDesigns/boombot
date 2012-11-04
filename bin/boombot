@@ -4,10 +4,10 @@
 var blacklist
   , Boombot = require('..')
   , commands = []
-  , config
+  , config = {}
   , events = require('../lib/events')
-  , fs = require('fs')
-  , version = 'V2.0.9'
+  , load = require('../lib/load')
+  , version = 'V2.1.0'
 //modify the base array object to check if arrays contain a value
 Array.prototype.contains = function(obj) {
   var i = this.length
@@ -16,95 +16,16 @@ Array.prototype.contains = function(obj) {
       return true
   return false
 }
-/**/// Public: Parses config.json settings
-/**///
-/**/// Args
-/**/// filepath - optional filepath value for debugging etc
-/**///
-/**/// Returns
-/**/// configuration - return parsed JSON object
-try {
-  console.log('*******Loading Configuration*******')
-  //filepath = (filepath === undefined) ? 'config.json' : filepath;
-  config = JSON.parse(fs.readFileSync('config.json', 'ascii'))
-  console.log('*******Configuration Loaded********')
-  console.log('***********************************')
-  console.log('**********BOOMBOT '+version+'***********')
-  console.log('***********************************')
-  console.log('*******Initializing Systems********')
-} catch(err) {
-  console.log(err)
-  console.log('[ ERROR ] : Error loading config.json. Check that your config file exists and is valid JSON.')
-  process.exit(33)
-}
-/**/// Public: loads the blacklist store
-/**///
-/**/// Returns
-/**/// blacklist - parsed blacklist object
-try {
-  console.log('*********Loading blacklist*********')
-  blacklist = JSON.parse(fs.readFileSync('./models/store/blacklist.json', 'ascii'))
-  console.log('*********Blacklist Loaded**********')
-  console.log(blacklist)
-} catch(err) {
-  console.log(err)
-  console.log('[ ERROR ] : Error loading blacklist.json. Check that your blacklist file exists and is valid JSON or empty brackets.')
-  process.exit(33)
-}
-/**/// Public: Loads all the command files from each location
-/**///
-/**/// Returns
-/**/// return - fills commands array from all command sources
-var loadCommands = function() {
-  /**/// Private: loads core scripts from lib/core
-  /**///
-  /**/// Returns
-  /**/// return - for each command in the base_controls array we will build the commands array
-  console.log('*******Loading Core Scripts********')
-  var base_controls = require('../lib/core/base_controls')
-  for (i = 0; i < base_controls.length; i++) {
-    console.log('Loading: ' + base_controls[i].trigger)
-    commands.push(base_controls[i])
-  }
-  /**/// Private: loads queue scripts from lib/core
-  /**///
-  /**/// Returns
-  /**/// return - for each command in the queue_controls array we will build the commands array
-  console.log('*******Loading Queue Scripts********')
-  var queue_controls = require('../lib/core/queue_controls')
-  for (i = 0; i < queue_controls.length; i++) {
-    console.log('Loading: ' + queue_controls[i].trigger)
-    commands.push(queue_controls[i])
-  }
-  /**/// Private: loads scripts from optional scripts folder
-  /**///
-  /**/// Returns
-  /**/// return - for each file in the scripts folder we will build the commands array
-  try {
-    var filenames = fs.readdirSync('./scripts')
-    console.log('*****Loading Optional Scripts******')
-    for (i = 0; i < filenames.length; i++) {
-      if (filenames[i] != '.DS_Store') {
-        console.log('Loading: ' + filenames[i])
-        var command = require('../scripts/' + filenames[i])
-        commands.push({'trigger': command.trigger, 'listed': command.listed, 'script': command.script})
-      }
-    }
-  } catch(err) {
-    console.log(err)
-    console.log('[ ERROR ] : Error loading script(s). Please fix or remove the failed script(s) shown above')
-  }
-  return commands
-}
-loadCommands()
-exports.LoadCommands = loadCommands
 /**/// Public: where does he get those wonderful toys?
-/**///
-/**/// Args
-/**/// config - parsed config file
-/**/// events - event router
 /**///
 /**/// Returns
 /**/// return - a shiny new robot
-var bot = Boombot.loadBot(config)
-  , boombot = Boombot.run(bot, events, commands, config, blacklist, version)
+var RunBot = function() {
+  config      = load.ParseConfig(version);
+  blacklist   = load.LoadBlacklist();
+  commands    = load.LoadCommands(commands);
+  var bot     = Boombot.loadBot(config)
+    , boombot = Boombot.run(bot, events, commands, config, blacklist, version)
+}
+
+module.exports = RunBot()

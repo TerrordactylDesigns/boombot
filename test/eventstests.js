@@ -12,7 +12,9 @@ var deregisteredData = require('./fixtures/deregisteredData')
   TESTS
 */
 module.exports = function(test, blankBoombot) {
-// roomChangedEvent tests
+/*
+  roomChangedEvent tests
+*/
 // verify theUsersList is reset
 test('test userList reset', function(t){
   var boombot = new blankBoombot()
@@ -28,7 +30,9 @@ test('test that the theUsersList is filled on roomChange', function(t) {
   t.ok(boombot.theUsersList['4f4ce636a3f7512f70000fef'], 'theUsersList is successfully filled on roomChange')
   t.end()
 })
-// registeredEvent tests
+/*
+  registeredEvent tests
+*/
 // verify the user is added to theUsersList
 test('test that the user is added to theUsersList', function(t) {
   var boombot = new blankBoombot()
@@ -51,7 +55,9 @@ test('test that a blacklisted user is booted on registeredEvent', function(t) {
   t.end()
 })
 // TODO - tests for announcers
-// deregisteredEvent tests
+/*
+  deregisteredEvent tests
+*/
 // verify the user is removed from theUsersList
 test('test that the user is removed from theUsersList', function(t) {
   var boombot = new blankBoombot()
@@ -72,7 +78,9 @@ test('test that the user is removed from the queue on deregisteredEvent', functi
   t.end()
 })
 // TODO - update_votes tests
-// newsongEvent tests
+/*
+  newsongEvent tests
+*/
 // verify the snagCounter is reset
 test('test newsongEvent resets the snagCounter', function(t) {
   var boombot = new blankBoombot()
@@ -93,7 +101,9 @@ test('test that the current Dj\'s play count increments on newsongEvent', functi
   t.end()
 })
 // TODO - test for queue control, autoNod
-// snaggedEvent tests
+/*
+  snaggedEvent tests
+*/
 // verify the snagCounter increments
 test('test snaggedEvent increments snagCounter', function(t) {
   var boombot = new blankBoombot()
@@ -102,7 +112,9 @@ test('test snaggedEvent increments snagCounter', function(t) {
   t.equal(1, boombot.snagCounter, 'The snagCounter was incremented on snag event')
   t.end()
 })
-// endsongEvent tests
+/*
+  endsongEvent tests
+*/
 // verify stats are spoken
 test('test that the after song stats are parsed and spoken on endsongEvent', function(t) {
   var actual = null
