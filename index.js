@@ -7,10 +7,10 @@
 /**/// Returns
 /**/// bot - a freshly built shiny new robot
 exports.loadBot = function(config) {
-  var robot = require('./lib/robot');
-  bot = robot.launch(config.botinfo.auth, config.botinfo.userid, config.roomid);
-  return bot;
-};
+  var robot = require('./lib/robot')
+  bot = robot.launch(config.botinfo.auth, config.botinfo.userid, config.roomid)
+  return bot
+}
 /**/// Public: tells the robot to listen and respond
 /**///
 /**/// Args
@@ -22,6 +22,6 @@ exports.loadBot = function(config) {
 /**/// Returns
 /**/// return - a fully operational battle station
 exports.run = function(bot, events, commands, config, blacklist, version) {
-  var robot = require('./lib/robot');
-  return robot.run(bot, events, commands, config, blacklist, version);
-};
+  var robot = require('./lib/robot')
+  return robot.run(bot, events, commands, config, blacklist, version)
+}
