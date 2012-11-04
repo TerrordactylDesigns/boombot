@@ -17,7 +17,7 @@
     "scripts" : "scripts"
   },
   "scripts": {
-    "test": "tap test/*.js"
+    "test": "tap test/index.js"
   },
   "dependencies": {
     "ttapi" : "> 1.5.x"
