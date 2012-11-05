@@ -16,8 +16,8 @@ module.exports = function(test, blankBoombot) {
   })
   // verify we can load a blacklist with members
   test('test that a filled blacklist loads', function(t) {
-    var blacklist = require('../lib/load').LoadBlacklist('./fixtures/filledblacklist.js')
-    t.equal('@GodOfThisAge', blacklist.user.name, 'Filled blacklist was successfully loaded')
+    var blacklist = require('../lib/load').LoadBlacklist('../test/fixtures/filledblacklist.json')
+    t.equal('@GodOfThisAge', blacklist['4f4ce636a3f7512f70000fef'].user.name, 'Filled blacklist was successfully loaded')
     t.end()
   })
   // test that core scripts load
