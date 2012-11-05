@@ -2,7 +2,6 @@
 /**///
 /**/// Args
 /**/// config - parsed config
-/**/// events - event router
 /**///
 /**/// Returns
 /**/// bot    - a freshly built shiny new robot
@@ -14,10 +13,12 @@ exports.loadBot = function(config) {
 /**/// Public: tells the robot to listen and respond
 /**///
 /**/// Args
-/**/// bot      - boombot instance
-/**/// events   - event handlers
-/**/// commands - array of bot commands
-/**/// config   - parsed config.json
+/**/// bot        - boombot instance
+/**/// events     - event handlers
+/**/// commands   - array of bot commands
+/**/// config     - parsed config.json
+/**/// blacklist  - array of blacklist objects
+/**/// version    - bot version
 /**///
 /**/// Returns
 /**/// return   - a fully operational battle station

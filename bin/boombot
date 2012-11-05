@@ -21,9 +21,14 @@ Array.prototype.contains = function(obj) {
 /**/// Returns
 /**/// return - a shiny new robot
 var RunBot = function() {
-  config      = load.ParseConfig(version);
-  blacklist   = load.LoadBlacklist();
-  commands    = load.LoadCommands(commands);
+  config      = load.ParseConfig(version)
+  blacklist   = load.LoadBlacklist()
+  // TODO
+  // theres gotta be a better way for this next part
+  // but im going test happy and just needed them split for now...
+  commands    = load.LoadCore(commands)
+  commands    = load.LoadQueue(commands)
+  commands    = load.LoadOptional(commands)
   var bot     = Boombot.loadBot(config)
     , boombot = Boombot.run(bot, events, commands, config, blacklist, version)
 }
