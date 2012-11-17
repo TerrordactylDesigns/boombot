@@ -86,6 +86,7 @@ test('test newsongEvent resets the snagCounter', function(t) {
   var boombot = new blankBoombot()
   boombot.snagCounter = 2
   boombot.theUsersList[newsongData.room.metadata.current_dj] = {name: 'test', IncPlays: function(){}}
+  boombot.config = {"twitter":{"tweet": false}}
   events.newsongEvent(boombot, newsongData)
   t.notOk(boombot.snagCounter == 2, 'The snagCounter was successfully reset on newsong')
   t.equal(0, boombot.snagCounter, 'The snagCounter was successfully reset on newsong')
@@ -96,6 +97,7 @@ test('test that the current Dj\'s play count increments on newsongEvent', functi
   var boombot = new blankBoombot()
     , testDj  = require('../models/dj')
   boombot.theUsersList['4f4ce636a3f7512f70000fef'] = new testDj('@GodOfThisAge', '4f4ce636a3f7512f70000fef')
+  boombot.config = {"twitter":{"tweet": false}}
   events.newsongEvent(boombot, newsongData)
   t.equal(boombot.theUsersList['4f4ce636a3f7512f70000fef'].plays, 1, 'current Dj play count is incremented on newsongEvent')
   t.end()
