@@ -20,7 +20,8 @@
     "test": "tap test/index.js"
   },
   "dependencies": {
-    "ttapi" : "> 1.5.x"
+    "ttapi" : "> 1.5.x",
+    "ntwitter" : "*"
   },
   "devDependencies": {
     "tap": "0.2.x"

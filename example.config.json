@@ -51,6 +51,7 @@
     "consumer_key" : "xxxxxxxxxxxxxxxxxxxxxx",
     "consumer_secret" : "xxxxxxxxxxxxxxxxxxxxxx",
     "access_token_key" : "xxxxxxxxxxxxxxxxxxxxxx",
-    "access_token_secret" : "xxxxxxxxxxxxxxxxxxxxxx"
+    "access_token_secret" : "xxxxxxxxxxxxxxxxxxxxxx",
+    "roomurl" : "http://turntable.fm/"
   }
 }
