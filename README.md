@@ -1,10 +1,11 @@
-#BOOM BOT V2.1.1
+#BOOM BOT V2.1.2
 
 [![Build Status](https://secure.travis-ci.org/TerrordactylDesigns/boombot.png)](http://travis-ci.org/TerrordactylDesigns/boombot)
 
 A bot for turntable.fm
 Control a Queue,
 Dj, welcome users,
+tweet songs playing,
 Call out haters, etc
 [Come play with one!](https://github.com/TerrordactylDesigns/boombot/wiki/Rooms-using-Boombot!-Add-yours!)
 
@@ -67,7 +68,11 @@ Commands can be entered in chat or via PM to the bot
 
 * vampire up - switch to the vampire avatar (requires 100 dj points)
 
+* avatar <number> - change the bots avatar to a specific one
+
 * addsong - adds the current playing song to the bots playlist
+
+* reorder - re-arranges the bots song queue
 
 * phone up - set the bots laptop to iPhone
 

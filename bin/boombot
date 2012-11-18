@@ -7,7 +7,7 @@ var blacklist
   , config    = {}
   , events    = require('../lib/events')
   , load      = require('../lib/load')
-  , version   = 'V2.1.1'
+  , version   = 'V2.1.2'
 //modify the base array object to check if arrays contain a value
 Array.prototype.contains = function(obj) {
   var i = this.length
