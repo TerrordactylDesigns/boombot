@@ -72,8 +72,6 @@ Commands can be entered in chat or via PM to the bot
 
 * addsong - adds the current playing song to the bots playlist
 
-* reorder - re-arranges the bots song queue
-
 * phone up - set the bots laptop to iPhone
 
 * fruit up - set the bots laptop to Mac
