@@ -114,6 +114,10 @@ Commands can be entered in chat or via PM to the bot
 
 * /none - set the song limit to 100
 
+##Mod Chat
+
+Room moderators can PM the bot and it will PM the rest of the mods like a private chat room
+
 ##Automatic DJ mode
 
 Boom Bot will hop up to save the day if the room drops to just 1 active DJ. He will hop back down again when a second DJ takes the stage.
