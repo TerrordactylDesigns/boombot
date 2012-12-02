@@ -53,5 +53,12 @@
     "access_token_key" : "xxxxxxxxxxxxxxxxxxxxxx",
     "access_token_secret" : "xxxxxxxxxxxxxxxxxxxxxx",
     "roomurl" : "http://turntable.fm/"
+  },
+  "lastfm" :
+  {
+    "scrobble" : false,
+    "use" : false,
+    "API_key": "xxxxxxxxxxxxxxxxxxxxxx",
+    "secret" : "xxxxxxxxxxxxxxxxxxxxxx"
   }
 }
