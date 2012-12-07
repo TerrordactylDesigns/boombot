@@ -1,7 +1,7 @@
 {
   "botinfo" :
   {
-    "auth" : "auth+live+xxxxxxxxxxxxxxxxxxxxxx",
+    "auth" : "xxxxxxxxxxxxxxxxxxxxxx",
     "userid" : "xxxxxxxxxxxxxxxxxxxxxx",
     "botname" : "boombot"
   },
