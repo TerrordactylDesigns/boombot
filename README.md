@@ -1,4 +1,4 @@
-#BOOM BOT V2.1.3
+#BOOM BOT V2.1.4
 
 [![Build Status](https://secure.travis-ci.org/TerrordactylDesigns/boombot.png)](http://travis-ci.org/TerrordactylDesigns/boombot)
 
@@ -49,7 +49,7 @@ All that done? Ready for the magic?
 
 Twitter - Get a Twitter API account and fill in the proper keys in the config file. Set tweet to true, fill in your rooms URL, the bot will now tweet the current playing song and a link to your room.
 
-Last.fm - Get a Last.fm API account and fill in the proper keys in the config file. Set use to true, you will now have access to artist and song information. Scrobble support coming soon.
+Last.fm - Get a Last.fm API account for the bot and fill in the proper keys in the config file. Set use to true, you will now have access to artist and song information. Set scrobble to true to scrobble room tracks to last.fm.
 
 ##Commands
 
