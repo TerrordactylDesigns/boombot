@@ -59,6 +59,8 @@
     "scrobble" : false,
     "use" : false,
     "API_key": "xxxxxxxxxxxxxxxxxxxxxx",
-    "secret" : "xxxxxxxxxxxxxxxxxxxxxx"
+    "secret" : "xxxxxxxxxxxxxxxxxxxxxx",
+    "username" : "xxxxxxxxxxxxxxxxxxxxxx",
+    "password" : "xxxxxxxxxxxxxxxxxxxxxx"
   }
 }
