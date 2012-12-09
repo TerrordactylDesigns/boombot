@@ -27,6 +27,7 @@ var Robot = function(boombot, events, commands, config, blacklist, version) {
   this.autoNod      = false
   this.nextUp       = {}
   this.version      = version
+  this.scrobble     = null
 }
 /**/// Public: respond via chat or pm
 /**///
