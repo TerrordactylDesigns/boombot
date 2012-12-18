@@ -1,4 +1,4 @@
-#BOOM BOT V2.1.8
+#BOOM BOT V2.1.9
 
 [![Build Status](https://secure.travis-ci.org/TerrordactylDesigns/boombot.png)](http://travis-ci.org/TerrordactylDesigns/boombot)
 
@@ -43,7 +43,7 @@ Download [Boombots Scripts](https://github.com/TerrordactylDesigns/Boombot-Scrip
 
 All that done? Ready for the magic?
 
-    node bin/boombot
+    npm start
 
 ##Advanced Setup
 
