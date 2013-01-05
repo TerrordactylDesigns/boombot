@@ -9,6 +9,7 @@
     "boombot"
   ],
   "main": "bin/boombot.js",
+  "bin": {"boombot":"./bin/boombot"},
   "directories": {
     "lib": "lib",
     "test": "test",
@@ -26,7 +27,7 @@
     "scribble" : ">= 0.0.2"
   },
   "devDependencies": {
-    "tap": "0.2.x"
+    "tap": "*"
   },
   "license": "MIT",
   "engines": {
