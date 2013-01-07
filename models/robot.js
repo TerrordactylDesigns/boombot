@@ -1,4 +1,4 @@
-/**/// Public: Robot class with all variables
+/**/// Public: Robot
 /**///
 /**/// Args
 /**/// boombot  - a ttapi bot instance
@@ -7,8 +7,8 @@
 /**/// config   - parsed config.json object
 /**///
 /**/// Returns
-/**/// return   - a robot linked to events, config, commands, and has
-/**///          variables set to defaults
+/**/// return   - a robot class linked to events, config, commands, and has
+/**///            variables set to defaults
 var Robot = function(boombot, events, commands, config, blacklist, version) {
   this.bot          = boombot
   this.config       = config
@@ -28,8 +28,9 @@ var Robot = function(boombot, events, commands, config, blacklist, version) {
   this.nextUp       = {}
   this.version      = version
   this.scrobble     = null
+  this.startTime    = Math.round(+new Date() / 1000)
 }
-/**/// Public: respond via chat or pm
+/**/// Public: respond
 /**///
 /**/// Args
 /**/// userid   - the users id
@@ -44,7 +45,7 @@ Robot.prototype.respond = function(userid, text, private) {
   else
     this.bot.speak(text)
 }
-/**/// Public: Remove a user from the Dj Queue
+/**/// Public: RemoveFromQueue
 /**///
 /**/// Args
 /**/// userID   - the userID of the Dj to remove
@@ -52,6 +53,9 @@ Robot.prototype.respond = function(userid, text, private) {
 /**///
 /**/// Returns
 /**/// return   - speech event of confirmation
+/**///
+/**/// Notes
+/**/// note     - removes a user from the Dj Queue
 Robot.prototype.RemoveFromQueue = function(userID, userName, private) {
   var DJIndex = this.djQueue.indexOf(userID)
   if (DJIndex != -1) {
@@ -64,13 +68,16 @@ Robot.prototype.RemoveFromQueue = function(userID, userName, private) {
     this.respond(userID, "You're not in the queue.... type q+ to add yourself.", private)
   }
 }
-/**/// Public: Run the queue
+/**/// Public: runQueue
 /**///
 /**/// Args
 /**/// currDjs  - array of current Djs on stage
 /**///
 /**/// Returns
 /**/// return   - Timer controlled announcement and enforcement of Queue
+/**///
+/**/// Notes
+/**/// note     - runs the queue
 Robot.prototype.runQueue = function() {
   var self = this
   this.bot.roomInfo(false, function(data){

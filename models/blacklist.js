@@ -1,4 +1,4 @@
-/**/// Public: Blacklist Object Class
+/**/// Public: Blacklist
 /**///
 /**/// Args
 /**/// user     - the users DJ object

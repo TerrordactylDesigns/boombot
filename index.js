@@ -1,16 +1,19 @@
-/**/// Public: duct tapes together a boom bot
+/**/// Public: loadBot
 /**///
 /**/// Args
 /**/// config - parsed config
 /**///
 /**/// Returns
 /**/// bot    - a freshly built shiny new robot
+/**///
+/**/// Notes
+/**/// note   - Duct tapes together a boombot
 exports.loadBot = function(config) {
   var robot = require('./lib/robot')
   bot       = robot.launch(config.botinfo.auth, config.botinfo.userid, config.roomid)
   return bot
 }
-/**/// Public: tells the robot to listen and respond
+/**/// Public: run
 /**///
 /**/// Args
 /**/// bot        - boombot instance
@@ -21,7 +24,10 @@ exports.loadBot = function(config) {
 /**/// version    - bot version
 /**///
 /**/// Returns
-/**/// return   - a fully operational battle station
+/**/// return     - a fully operational battle station
+/**///
+/**/// Notes
+/**/// note       - tells the robot to listen and respond
 exports.run = function(bot, events, commands, config, blacklist, version) {
   var robot = require('./lib/robot')
   return robot.run(bot, events, commands, config, blacklist, version)

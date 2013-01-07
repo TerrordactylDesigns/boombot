@@ -1,4 +1,4 @@
-/**/// Public: DJ object class
+/**/// Public: DJ
 /**///
 /**/// Args
 /**/// name   - Dj name

@@ -1,4 +1,4 @@
-#BOOM BOT V2.1.9
+#BOOM BOT V2.2.0
 
 [![Build Status](https://secure.travis-ci.org/TerrordactylDesigns/boombot.png)](http://travis-ci.org/TerrordactylDesigns/boombot)
 
@@ -55,6 +55,32 @@ Last.fm - Get a Last.fm API account for the bot and fill in the proper keys in t
 
 Commands can be entered in chat or via PM to the bot
 
+##Base Commands
+
+* /lyrics - return the current playing songs lyrics
+
+* /video - return the current playing songs video
+
+* /help - lists the current bots commands
+
+* /rules - returns the rules listed in the bots config.json file
+
+* /boombot - returns the bots version and links to get your own
+
+* /version - returns the bots current version
+
+* /mods - the bot will list the current mods online in the room
+
+###Base Commands When Last.fm Support Is Enabled And Configured
+
+* /album - return the album the current song is from
+
+* /similarsongs - return 3 similar songs to the current one
+
+* /similarartists - return 3 similar artists to the current one
+
+* /artistinfo - return information about the current artist playing
+
 ##Administrator/"The Master":
 
   All commands for the master require the setting for botname to trigger.
@@ -97,6 +123,8 @@ Commands can be entered in chat or via PM to the bot
 * blacklist <username> - bans user from the room
 
 * listbans - lists banned users, the mod who banned them, and when they were banned
+
+* uptime - the bot returns its current uptime
 
 ##Queue commands
 
