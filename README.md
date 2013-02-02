@@ -154,6 +154,8 @@ Commands can be entered in chat or via PM to the bot
 
 * /none - set the song limit to 100
 
+* vip <username> - move the user to the front of the queue
+
 ##Mod Chat
 
 Room moderators can PM the bot and it will PM the rest of the mods like a private chat room
