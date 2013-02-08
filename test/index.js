@@ -18,14 +18,6 @@ var test = require('tap').test
       this.theUsersList     = {}
       this.yank             = false
     }
-// im lazy
-Array.prototype.contains = function(obj) {
-  var i = this.length
-  while (i--)
-    if (this[i] == obj)
-      return true
-  return false
-}
 /*
   TESTS
 */

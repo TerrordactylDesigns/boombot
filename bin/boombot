@@ -10,14 +10,6 @@ var blacklist
   , events    = require('../lib/events')
   , load      = require('../lib/load')
   , version   = 'V' + require('../package.json').version
-// modify the base array object to check if arrays contain a value
-Array.prototype.contains = function(obj) {
-  var i = this.length
-  while (i--)
-    if (this[i] == obj)
-      return true
-  return false
-}
 /**/// Public: where does he get those wonderful toys?
 /**///
 /**/// Returns
