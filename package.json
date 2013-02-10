@@ -1,7 +1,7 @@
 {
   "name": "boombot",
   "description": "chat and DJ bot for turntable.fm",
-  "version": "2.2.3",
+  "version": "2.2.4",
   "keywords": [
     "turntablefm",
     "turntable",
@@ -24,7 +24,7 @@
   "dependencies": {
     "ttapi" : "> 1.5.x",
     "ntwitter" : "*",
-    "scribble" : ">= 0.0.2"
+    "scribble" : ">= 0.0.4"
   },
   "devDependencies": {
     "tap": "*"
