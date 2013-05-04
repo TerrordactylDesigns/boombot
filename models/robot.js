@@ -31,10 +31,6 @@ var Robot = function(boombot, events, commands, config, blacklist, version) {
   this.scrobble     = null
   this.startTime    = Math.round(+new Date() / 1000)
   this.scribble     = (this.config.lastfm.use) ? new Scribble(this.config.lastfm.API_key, this.config.lastfm.secret, this.config.lastfm.username, this.config.lastfm.password) : null
-  
-  //Theme variables - necessary for making bot message users theme on room entry - angryrancor 4/13/13  
-  this.noTheme      = "No theme right now - play whatever you'd like."
-  this.theme        = "No theme right now - play whatever you'd like."
 }
 /**/// Public: respond
 /**///
