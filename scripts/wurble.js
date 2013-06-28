@@ -1,26 +1,21 @@
-/**/// Description: return a random like a boss image
+/**/// Description: return a wurble
 /**///
 /**/// Dependencies: None
 /**///
-/**/// Author: https://github.com/TerrordactylDesigns
+/**/// Author: https://github.com/ggentzke
 /**///
 /**/// Notes: None
-exports.trigger = 'like a boss';
+exports.trigger = 'wurble';
 exports.listed = true;
 exports.script = function(boombot, text, uname, uid, private) {
   //like a boss array
-  var bossList = [
-    "http://goo.gl/R2Abr",
-    "http://goo.gl/OWVEY",
-    "http://goo.gl/4mB62",
-    "http://goo.gl/5IsZp",
-    "http://goo.gl/uEddI",
-    "http://goo.gl/Z7eFQ",
-    "http://goo.gl/F0dFs",
-    "http://goo.gl/bkFKL",
-    "http://goo.gl/KRlQr"
-  ];
-  var rndm = Math.floor(Math.random() * 9);
-  boombot.respond(uid, bossList[rndm], private);
+  var wurbleList = [
+    'wurble!',
+    '[WURBLE]',
+    'w00rbl3?',
+    'no u'
+  ],
+      rndm = Math.floor(Math.random() * wurbleList.length);
+  boombot.respond(uid, wurbleList[rndm], private);
 }
 
