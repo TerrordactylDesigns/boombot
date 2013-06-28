@@ -8,7 +8,7 @@
 exports.trigger = 'wurble';
 exports.listed = true;
 exports.script = function(boombot, text, uname, uid, private) {
-  //like a boss array
+  //wurble array
   var wurbleList = [
     'wurble!',
     '[WURBLE]',
