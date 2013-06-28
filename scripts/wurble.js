@@ -13,7 +13,9 @@ exports.script = function(boombot, text, uname, uid, private) {
     'wurble!',
     '[WURBLE]',
     'w00rbl3?',
-    'no u'
+    'no u',
+    'John, did you put ' + uname + ' up to this?',
+    'OK bark? Yea? Chill!'
   ],
       rndm = Math.floor(Math.random() * wurbleList.length);
   boombot.respond(uid, wurbleList[rndm], private);
