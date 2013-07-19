@@ -87,8 +87,8 @@ Robot.prototype.runQueue = function() {
     if (self.djQueue.length > 0 && currDjs.length < 5) {
       // store the users name and id to stop the recursion insanity i had going on
       self.nextUp = {"name" : self.theUsersList[self.djQueue[0]].name, "id" : self.djQueue[0]}
-      self.respond(self.djQueue, '@' + self.nextUp.name + ' you have 30 seconds starting now to step up', true)
-      self.respond(self.djQueue, '@' + self.nextUp.name + ' you have 30 seconds starting now to step up', false)
+      self.respond(self.theUsersList[self.djQueue[0]].userid, '@' + self.nextUp.name + ' you have 30 seconds starting now to step up', true)
+      self.respond(self.theUsersList[self.djQueue[0]].userid, '@' + self.nextUp.name + ' you have 30 seconds starting now to step up', false)
       var thisBot = self
       setTimeout(function(){
         // after 30 seconds if that user isnt on stage drop them from queue, hear the lamentation of their women, and run again.
