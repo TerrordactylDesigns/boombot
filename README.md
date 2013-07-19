@@ -1,4 +1,4 @@
-#BOOM BOT V2.2.4
+#BOOM BOT V2.2.5
 
 [![Build Status](https://secure.travis-ci.org/TerrordactylDesigns/boombot.png)](http://travis-ci.org/TerrordactylDesigns/boombot)
 
@@ -70,6 +70,8 @@ Commands can be entered in chat or via PM to the bot
 * /version - returns the bots current version
 
 * /mods - the bot will list the current mods online in the room
+
+* /theme - see the rooms current theme
 
 ###Base Commands When Last.fm Support Is Enabled And Configured
 
@@ -155,6 +157,12 @@ Commands can be entered in chat or via PM to the bot
 * /none - set the song limit to 100
 
 * vip <username> - move the user to the front of the queue
+
+##Mod Commands
+
+* /settheme <theme> - set the rooms current theme
+
+* /notheme - shut off the rooms theme
 
 ##Mod Chat
 
