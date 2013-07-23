@@ -7,9 +7,10 @@
 /**/// Returns
 /**/// return - A Dj object for queue and event processing
 var DJ = function(name, userid) {
-this.name   = name
-this.userid = userid
-this.plays  = 0
+  this.name       = name
+  this.userid     = userid
+  this.plays      = 0
+  this.startFans  = 0
 }
 /**/// Public: Set Dj play count to 0
 /**///
